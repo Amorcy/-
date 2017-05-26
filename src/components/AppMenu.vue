@@ -28,6 +28,30 @@
 			<div class="list-item" 
 			      :style="css.check" 
 			      v-on:click="navigatorApi"
+			      title="bisness">
+
+				<div class="cxticon">
+					<i class="iconfont icon-lladdresshome"></i>
+					<span>商户</span>
+				</div>
+				<div class="dropicon"></div>
+			</div>
+            
+            <div class="list-item" 
+			      :style="css.check" 
+			      v-on:click="navigatorApi"
+			      title="sales">
+
+				<div class="cxticon" >
+					<i class="iconfont icon-sandiantu"></i>
+					<span>分销商</span>
+				</div>
+				<div class="dropicon"></div>
+			</div>
+
+			<div class="list-item" 
+			      :style="css.check" 
+			      v-on:click="navigatorApi"
 			      title="checksale">
 
 				<div class="cxticon" >
@@ -36,7 +60,7 @@
 				</div>
 				<div class="dropicon"></div>
 			</div>
-			
+            
 			<div class="list-item" 
 			     :style="css.setting"
 			     v-on:click="navigatorApi" 
@@ -55,7 +79,8 @@
 		name:'AppMenu',
 		data(){
 			return {
-				css:{summery:{backgroundColor:'rgb(51,135,255)',color:'#ffffff'},
+				css:{
+					            summery:{backgroundColor:'rgb(51,135,255)',color:'#ffffff'},
 								check:{backgroundColor:'rgb(48,57,69)',color:'rgb(161,169,179)'},
 								setting:{backgroundColor:'rgb(48,57,69)',color:'rgb(161,169,179)'}}
 			}
@@ -88,8 +113,11 @@
                         
                         _css.check.backgroundColor="rgb(48,57,69)";
                         _css.check.color="rgb(161,169,179)";
+
                         _css.setting.backgroundColor="rgb(48,57,69)";
                         _css.setting.color="rgb(161,169,179)";
+                        
+
                         this.$router.push({name:'dashboard'});
                        break;
                        case "checksale":
@@ -98,9 +126,12 @@
                         
                         _css.check.backgroundColor="rgb(51,135,255)";
                         _css.check.color="#ffffff";
+
                         _css.setting.backgroundColor="rgb(48,57,69)";
                         _css.setting.color="rgb(161,169,179)";
+
                         this.$router.push({name:'checksale'});
+
                        break;
                        case "setting":
                          
@@ -109,14 +140,17 @@
                         
                         _css.check.backgroundColor="rgb(48,57,69)";
                         _css.check.color="rgb(161,169,179)";
+
                         _css.setting.backgroundColor="rgb(51,135,255)";
                         _css.setting.color="#ffffff";
+
                         this.$router.push({name:'setting'});
                        break;
                  }  
 			}
 		}
 	}
+
 </script>
 <style>
 	.menu{
