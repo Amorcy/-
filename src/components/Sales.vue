@@ -1,7 +1,7 @@
 <!--
-描述:登录成功概览
+描述:登录成功分销
 作者:dong.xie
 -->
 <template>
-	<div>汇总</div>
+	<div>分销</div>
 </template>

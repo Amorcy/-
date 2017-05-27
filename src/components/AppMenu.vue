@@ -1,5 +1,5 @@
 <!--
-描述:登录成功首页
+描述:登录成功左侧菜单导航
 作者:dong.xie
 -->
 <template>
@@ -18,7 +18,7 @@
 		</div>
 		<div class="menu-list">
 			<div class="list-item" :style="css.summery" 
-			v-on:click="navigatorApi" title="dashboard">
+			v-on:click="navigatorApi" title="summery">
 				<div class="cxticon">
 					<i class="iconfont icon-interest-active"></i>
 					<span>概况</span>
@@ -26,9 +26,9 @@
 				<div class="dropicon"></div>
 			</div>
 			<div class="list-item" 
-			      :style="css.check" 
+			      :style="css.business" 
 			      v-on:click="navigatorApi"
-			      title="bisness">
+			      title="business">
 
 				<div class="cxticon">
 					<i class="iconfont icon-lladdresshome"></i>
@@ -38,7 +38,7 @@
 			</div>
             
             <div class="list-item" 
-			      :style="css.check" 
+			      :style="css.sales" 
 			      v-on:click="navigatorApi"
 			      title="sales">
 
@@ -52,7 +52,7 @@
 			<div class="list-item" 
 			      :style="css.check" 
 			      v-on:click="navigatorApi"
-			      title="checksale">
+			      title="check">
 
 				<div class="cxticon" >
 					<i class="iconfont icon-renminbi"></i>
@@ -61,16 +61,60 @@
 				<div class="dropicon"></div>
 			</div>
             
-			<div class="list-item" 
-			     :style="css.setting"
-			     v-on:click="navigatorApi" 
-			     title="setting">
-				<div class="cxticon">
-					<i class="iconfont icon-interest-active"></i>
-					<span>设置</span>
+            <div>
+				<div class="list-item" 
+				     :style="css.setting"
+				     v-on:click="navigatorApi" 
+				     title="setting">
+
+							<div class="cxticon">
+								<i class="iconfont icon-set"></i>
+								<span>设置</span>
+							</div>
+							<div class="dropicon"></div>
 				</div>
-				<div class="dropicon"></div>
-			</div>
+				<div class="list-item-children">
+					<div class="list-item-children-items">
+						<div class="child-items">
+							<i class="iconfont icon-lladdresshome"></i>
+							<span>门店管理</span>
+						</div>
+					</div>
+                    <div class="list-item-children-items">
+						<div class="child-items">
+							<i class="iconfont icon-caipinfenleizhankai"></i>
+							<span>菜品管理</span>
+						</div>
+					</div>
+
+					<div class="list-item-children-items">
+						<div class="child-items">
+							<i class="iconfont icon-wodequanyi"></i>
+							<span>权益规则</span>
+						</div>
+					</div>
+                    <div class="list-item-children-items">
+						<div class="child-items">
+							<i class="iconfont icon-dingdan1"></i>
+							<span>协议模板</span>
+						</div>
+					</div>
+					<div class="list-item-children-items">
+						<div class="child-items">
+							<i class="iconfont icon-hui"></i>
+							<span>商户优惠</span>
+						</div>
+					</div>
+					<div class="list-item-children-items">
+						<div class="child-items">
+							<i class="iconfont icon-admin"></i>
+							<span>用户管理</span>
+						</div>
+					</div>
+
+				</div>
+
+             </div>
 		</div>
 	</div>
 </template>
@@ -81,9 +125,11 @@
 			return {
 				css:{
 					            summery:{backgroundColor:'rgb(51,135,255)',color:'#ffffff'},
+					            business:{backgroundColor:'rgb(48,57,69)',color:'rgb(161,169,179)'},
+					            sales:{backgroundColor:'rgb(48,57,69)',color:'rgb(161,169,179)'},
 								check:{backgroundColor:'rgb(48,57,69)',color:'rgb(161,169,179)'},
 								setting:{backgroundColor:'rgb(48,57,69)',color:'rgb(161,169,179)'}}
-			}
+			    }
 		},
 		methods:{
 			eventProxy:function(e){
@@ -102,51 +148,24 @@
                  }
                  return e.title;
 			},
+			routerProxy:function(_routerName){
+				var _css=this.css;
+                for(var key in this.css){
+                   if(key==_routerName){
+                   	 _css[key].backgroundColor="rgb(51,135,255)";
+                   	 _css[key].color="#ffffff";
+                   }else{
+                   	 _css[key].backgroundColor="rgb(48,57,69)";
+                   	 _css[key].color="rgb(161,169,179)";
+                   }
+                   this.$router.push({name:_routerName});
+                 
+                }
+			},
 			navigatorApi:function(e){
 				 var _css=this.css;
                  var _routerName=this.eventProxy(e);
-                 console.log(_routerName);
-                 switch(_routerName){
-                       case "dashboard":
-                        _css.summery.backgroundColor="rgb(51,135,255)";
-                        _css.summery.color="#ffffff";
-                        
-                        _css.check.backgroundColor="rgb(48,57,69)";
-                        _css.check.color="rgb(161,169,179)";
-
-                        _css.setting.backgroundColor="rgb(48,57,69)";
-                        _css.setting.color="rgb(161,169,179)";
-                        
-
-                        this.$router.push({name:'dashboard'});
-                       break;
-                       case "checksale":
-                        _css.summery.backgroundColor="rgb(48,57,69)";
-                        _css.summery.color="rgb(161,169,179)";
-                        
-                        _css.check.backgroundColor="rgb(51,135,255)";
-                        _css.check.color="#ffffff";
-
-                        _css.setting.backgroundColor="rgb(48,57,69)";
-                        _css.setting.color="rgb(161,169,179)";
-
-                        this.$router.push({name:'checksale'});
-
-                       break;
-                       case "setting":
-                         
-                         _css.summery.backgroundColor="rgb(48,57,69)";
-                        _css.summery.color="rgb(161,169,179)";
-                        
-                        _css.check.backgroundColor="rgb(48,57,69)";
-                        _css.check.color="rgb(161,169,179)";
-
-                        _css.setting.backgroundColor="rgb(51,135,255)";
-                        _css.setting.color="#ffffff";
-
-                        this.$router.push({name:'setting'});
-                       break;
-                 }  
+                 this.routerProxy(_routerName);
 			}
 		}
 	}
@@ -234,4 +253,26 @@
 		width:0.38rem;
 		height: 100%;
 	}
+	.list-item-children{
+		width:100%;
+		min-height:0.9rem;
+	}
+	.list-item-children-items{
+		width:100%;
+		height: 0.45rem;
+		background-color: rgb(28,33,40);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.child-items{
+		width:1.42rem;height: 0.45rem;
+		color: #ffffff;
+		 font-size:0.16rem;
+		 display: flex;
+		 justify-content: space-around;
+		 align-items: center;
+	}
+	
+
 </style>

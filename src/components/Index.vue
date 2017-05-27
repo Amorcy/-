@@ -29,4 +29,8 @@
 		height: 100%;
 		background-color: rgb(48,57,69);
 	}
+	.views{
+		width:12.66rem;
+		height: 100%;
+	}
 </style>

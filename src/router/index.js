@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Index from '@/components/Index'
 import Login from '@/components/Login'
 import DashBoard from '@/components/DashBoard'
+import Business from '@/components/Business'
+import Sales from '@/components/Sales'
 import CheckSale from '@/components/CheckSale'
 import Setting from '@/components/Setting'
 
@@ -20,9 +22,13 @@ export default new Router({
     	name:'Index',
     	component:Index,
       children:[
-          {path:'/',name:'dashboard',component:DashBoard},
-          {path:'/checksale',name:'checksale',component:CheckSale},
-          {path:'/setting',name:'setting',component:Setting}
+          {path:'/',name:'summery',component:DashBoard},
+          {path:'/business',name:'business',component:Business},
+          {path:'/sales',name:'sales',component:Sales},
+          {path:'/check',name:'check',component:CheckSale},
+          {path:'/setting',name:'setting',component:Setting,
+            children:[{path:'/',name:'setting',component:Setting}]
+          }
       ]
     }
   ]
