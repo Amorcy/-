@@ -101,7 +101,7 @@ export default {
 		console.log('init charts');
 		setTimeout(()=>{
 			this.initialEcharts();
-		},800); 
+		},300); 
 	}
 }
 

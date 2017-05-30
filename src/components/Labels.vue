@@ -57,7 +57,8 @@
 
 <style>
     input[placeholder], [placeholder], *[placeholder] { 
-	     color:#333333 
+	     color:#333333 ;
+         font-size:0.14rem;
 	} 
     .label{
     	width:12.66rem;

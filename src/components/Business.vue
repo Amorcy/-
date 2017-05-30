@@ -3,12 +3,29 @@
 作者:dong.xie
 -->
 <template>
-	<div>商户</div>
+	<div>
+		<Labels 
+	         :name="textName"
+             :hasSearch="true"
+             :title="title"
+	     ></Labels>
+
+	</div>
 </template>
 
 <script>
+	import Labels from './Labels';
 	
-
+	export default {
+		 name:'dashboard',
+		 components:{Labels},
+		 data(){
+		 	return {
+		 		textName:'商户',
+		 		title:'门面名称/门店编号',
+		 	}
+		 } 
+	}
 </script>
 
 
