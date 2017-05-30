@@ -17,7 +17,7 @@
 			<div class="babelName">
 				{{name}}
 			</div>
-			<div class="babelSearch">
+			<div class="babelSearch" v-if="hasSearch==true">
 				<div class="labelInput">
 					<input v-model="text"  type="text" name="searchTxt" v-bind:placeholder="title">
 					<i class="iconfont icon-sousuo_sousuo" v-on:click="search"></i>
@@ -34,7 +34,7 @@
 <script>
 	export default {
 		name:'label',
-		props:['name','title','source'],
+		props:['name','title','source','hasSearch'],
 		data(){
 			return {
 				text:''
@@ -60,9 +60,10 @@
 	     color:#333333 
 	} 
     .label{
-    	width:12.55rem;
+    	width:12.66rem;
     	height: 1.13rem;
     	margin:0 auto;
+
     }
     .labelTop{
     	width:100%;
@@ -71,6 +72,7 @@
     	justify-content: space-between;
     	align-items: center;
     	flex-wrap: nowrap;
+        border-bottom: 1px solid #dddddd;
     }
     .labelTop>i{
     	width:0.3rem;

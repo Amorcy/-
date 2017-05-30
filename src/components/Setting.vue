@@ -8,6 +8,7 @@
 	         :name="textName"
              :title="placeTxt"
              :source="api"
+             :hasSearch="true"
 
 	     ></Labels>
          <div class="tables">
