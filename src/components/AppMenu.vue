@@ -60,6 +60,22 @@
 				</div>
 				<div class="dropicon"></div>
 			</div>
+			<div class="list-item-children">
+					<div class="list-item-children-items" v-on:click="navigatorApiChild" title="vendorCheck">
+
+						<div class="child-items">
+							<i class="iconfont icon-lladdresshome"></i>
+							<span>商户核销单</span>
+						</div>
+					</div>
+					<div class="list-item-children-items" v-on:click="navigatorApiChild" title="businessCheck">
+
+						<div class="child-items">
+							<i class="iconfont icon-lladdresshome"></i>
+							<span>分销核销单</span>
+						</div>
+					</div>
+			</div>
             
             <div>
 				<div class="list-item" 
@@ -112,7 +128,12 @@
 							<span>用户管理</span>
 						</div>
 					</div>
-
+                    <div class="list-item-children-items" v-on:click="navigatorApiChild" title="manageRoles">
+						<div class="child-items">
+							<i class="iconfont icon-admin"></i>
+							<span>角色管理</span>
+						</div>
+					</div>
 				</div>
 
              </div>
@@ -184,7 +205,7 @@
 	.menu{
 		width: 100%;
 		height: 100%;
-		overflow: hidden;
+		overflow-y: scroll;
 	}
 	.menu-icon{
 		width:100%;

@@ -17,8 +17,11 @@
 
 					  <md-table-body>
 					    <md-table-row v-for="(row, index) in 10" :key="index">
-					      <md-table-cell v-for="(col, index) in resultSet" :key="index" md-numeric>10</md-table-cell>
-					      <md-table-cell class="actions"><div v-on:click="row.actions" class="options" v-for="(row,index) in actionName" :key="index">{{row.txt}}</div></md-table-cell> 
+					      <md-table-cell v-for="(col, index) in resultSet" :key="index"  md-numeric>10</md-table-cell>
+					      <md-table-cell class="actions">
+					          <div v-on:click="row.actions" 
+					           class="options" 
+					           v-for="(row,index) in actionName"  :key="index">{{row.txt}}</div></md-table-cell> 
 					    </md-table-row>
 					  </md-table-body>
 					</md-table>
@@ -52,10 +55,10 @@
 <script>
 	export default {
 		name:'tables',
-		props:['bodyName','actionName','resultSet'],
+		props:['bodyName','actionName','resultSet','cellStyle'],
 		data(){
 			return {
-
+                  
 			}
 		}
 	}
@@ -142,6 +145,9 @@
    	   	display:flex;
 	   	align-items: center;
 	   	justify-content: space-around;
+   }
+   .md-table .md-table-cell.md-numeric .md-table-cell-container{
+   	 justify-content: center;
    }
 
 

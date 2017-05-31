@@ -40,9 +40,10 @@
         username:'',
         password:'',
         styles:{width:'2.4rem'},
-        baseToken:'',
+        baseToken:'Basic eW1zLWFwaTpSVUtUVEpFSk84SFRSQlhIS09MUA==',
         newestToken:'',
         LoginService:'http://101.200.79.3:8765/uaa/oauth/token'
+        
       }
     },
     methods: {
@@ -53,13 +54,15 @@
            _body.grant_type="password";
            console.log(Api.formFormat(_body));
            var options={
-                 headers:{ 'Content-Type':'application/x-www-form-urlencoded',
-                                   'token':'Basic eW1zLWFwaTpSVUtUVEpFSk84SFRSQlhIS09MUA==',
-                                   'Authorization':'Basic eW1zLWFwaTpSVUtUVEpFSk84SFRSQlhIS09MUA=='}
+                 headers:{ 
+                                   'Content-Type':'application/x-www-form-urlencoded',
+                                   'Authorization':this.baseToken
+                                 }
                 };
            this.$http.post(this.LoginService,Api.formFormat(_body),options).then((res)=>{
                 console.log(res);
            });
+           //this.$router.push({name:'Index'});
         }
     
     }

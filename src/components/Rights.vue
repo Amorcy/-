@@ -34,21 +34,20 @@
 		 components:{Labels,Tables,ButtonGroup},
 		 data(){
 		 	return {
-		 		textName:'角色管理',
+		 		textName:'添加权益',
 		 		title:'权益编号/权益名称/状态',
-		 		bodyName:["编号","角色名称","角色描述","角色权限"],
+		 		bodyName:["权益编号","权益名称","权益内容","返佣占比","返佣方式","状态"],
 		 		actionName:[
-		 		
-		 		{"txt":"编辑",actions:function(){
-                      alert('编辑');
-		 		}},
 		 		{"txt":"停用",actions:function(){
                       alert('停用');
+		 		}},
+		 		{"txt":"编辑",actions:function(){
+                      alert('编辑');
 		 		}}
 		 		],
-		 		resultSet:4,
+		 		resultSet:6,
 		 		btnList:[
-		           {title:'添加角色',action:function(){
+		           {title:'添加权益',action:function(){
 		             alert('添加啊');
 		           },styles:{width:'0.75rem',backgroundColor:'rgb(51, 135, 255)',color:'#ffffff'}}
 		        ],
