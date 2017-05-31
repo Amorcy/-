@@ -74,38 +74,39 @@
 							<div class="dropicon"></div>
 				</div>
 				<div class="list-item-children">
-					<div class="list-item-children-items">
+					<div class="list-item-children-items" v-on:click="navigatorApiChild" title="manageStores">
+
 						<div class="child-items">
 							<i class="iconfont icon-lladdresshome"></i>
 							<span>门店管理</span>
 						</div>
 					</div>
-                    <div class="list-item-children-items">
+                    <div class="list-item-children-items" v-on:click="navigatorApiChild" title="manageDishes">
 						<div class="child-items">
 							<i class="iconfont icon-caipinfenleizhankai"></i>
 							<span>菜品管理</span>
 						</div>
 					</div>
 
-					<div class="list-item-children-items">
+					<div class="list-item-children-items" v-on:click="navigatorApiChild" title="rightRoles">
 						<div class="child-items">
 							<i class="iconfont icon-wodequanyi"></i>
 							<span>权益规则</span>
 						</div>
 					</div>
-                    <div class="list-item-children-items">
+                    <div class="list-item-children-items" v-on:click="navigatorApiChild" title="agreementTemplates">
 						<div class="child-items">
 							<i class="iconfont icon-dingdan1"></i>
 							<span>协议模板</span>
 						</div>
 					</div>
-					<div class="list-item-children-items">
+					<div class="list-item-children-items" v-on:click="navigatorApiChild" title="discountUsers">
 						<div class="child-items">
 							<i class="iconfont icon-hui"></i>
 							<span>商户优惠</span>
 						</div>
 					</div>
-					<div class="list-item-children-items">
+					<div class="list-item-children-items" v-on:click="navigatorApiChild" title="manageUsers">
 						<div class="child-items">
 							<i class="iconfont icon-admin"></i>
 							<span>用户管理</span>
@@ -128,7 +129,8 @@
 					            business:{backgroundColor:'rgb(48,57,69)',color:'rgb(161,169,179)'},
 					            sales:{backgroundColor:'rgb(48,57,69)',color:'rgb(161,169,179)'},
 								check:{backgroundColor:'rgb(48,57,69)',color:'rgb(161,169,179)'},
-								setting:{backgroundColor:'rgb(48,57,69)',color:'rgb(161,169,179)'}}
+								setting:{backgroundColor:'rgb(48,57,69)',color:'rgb(161,169,179)'},
+							}
 			    }
 		},
 		methods:{
@@ -139,16 +141,17 @@
                  
                  if(tagName=="LI"||tagName=="SPAN"){
                     e=e.target.parentElement.parentElement;
-                 }else if(className=="cxticon"||className=="dropicon"){
+                 }else if(className=="cxticon"||className=="dropicon"||className=="child-items"){
                     e=e.target.parentElement;
                  }else if(className=="list-item"){
                  	e=e.target;
                  }else{
                  	e=e.target;
                  }
-                 return e.title;
+                 return e;
 			},
 			routerProxy:function(_routerName){
+				_routerName=_routerName.title;
 				var _css=this.css;
                 for(var key in this.css){
                    if(key==_routerName){
@@ -166,6 +169,12 @@
 				 var _css=this.css;
                  var _routerName=this.eventProxy(e);
                  this.routerProxy(_routerName);
+			},
+			navigatorApiChild:function(e){
+               var _rn=this.eventProxy(e);
+               var _title=_rn.title;
+               console.log(_title);
+               this.$router.push({name:_title});
 			}
 		}
 	}
@@ -256,6 +265,8 @@
 	.list-item-children{
 		width:100%;
 		min-height:0.9rem;
+		overflow:hidden;
+		transition: height 1s linear;
 	}
 	.list-item-children-items{
 		width:100%;
