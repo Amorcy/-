@@ -72,7 +72,7 @@
 		height:-moz-calc(100% - 1.13rem);
 		height:-webkit-calc(100% - 1.13rem);
     	background-color: rgb(237,237,237);
-    	overflow:scroll;
+    	overflow-y: scroll;
 	}
 	.tableCxt{
 		width:12rem;

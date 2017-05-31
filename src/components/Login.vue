@@ -10,16 +10,16 @@
         	</div>
         	<div class="loginBox">
         		<div class="loginUserName">
-        			      <label class="labelUser">账户</label><input type="text" name="username"/>
+        			      <label class="labelUser">账户</label><input type="text" v-model="username"/>
         		</div>
         		<div class="loginPassWord">
-        			      <label class="labelPwd">密码</label><input type="password" name="password"/>
+        			      <label class="labelPwd">密码</label><input type="password" v-model="password"/>
         		</div>
         		<div class="loginForget">
         			<md-checkbox id="my-test2" name="my-test2"   class="md-primary">  记住此账号</md-checkbox>
         		</div>
         		<div class="loginSubmit">
-        			 <md-button  class="md-raised md-primary" @click.native="navigatorApi">登录</md-button>
+        			 <md-button  class="md-raised md-primary" :style="styles" @click.native="navigatorApi">登录</md-button>
         		</div>
         		<div class="findPwd">忘记密码?</div>
         	</div>
@@ -30,16 +30,36 @@
 	</div>
 </template>
 <script>
+  
+  import Api from '../api/api';
 	export default {
 		name:'Login',
     data(){
       return {
         msg:'xxxx',
+        username:'',
+        password:'',
+        styles:{width:'2.4rem'},
+        baseToken:'',
+        newestToken:'',
+        LoginService:'http://101.200.79.3:8765/uaa/oauth/token'
       }
     },
     methods: {
         navigatorApi: function (event) {
-            this.$router.push({name:'Index'});
+           var _body={};
+           _body.username=this.username;
+           _body.password=this.password;
+           _body.grant_type="password";
+           console.log(Api.formFormat(_body));
+           var options={
+                 headers:{ 'Content-Type':'application/x-www-form-urlencoded',
+                                   'token':'Basic eW1zLWFwaTpSVUtUVEpFSk84SFRSQlhIS09MUA==',
+                                   'Authorization':'Basic eW1zLWFwaTpSVUtUVEpFSk84SFRSQlhIS09MUA=='}
+                };
+           this.$http.post(this.LoginService,Api.formFormat(_body),options).then((res)=>{
+                console.log(res);
+           });
         }
     
     }
