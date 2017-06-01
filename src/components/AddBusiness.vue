@@ -1,7 +1,13 @@
+<!--
+添加商户组件
+-->
 <template>
 	<div class="add-business">
 		<div class="add-cxt">
-			
+			<div class="add-cxt-form">
+				
+
+			</div>
 		</div>
 		<div class="add-tables">
 			<div class="add-tables-cxt">
@@ -52,6 +58,7 @@
 		width:3rem;
 		height: 100%;
 		background-color: #ffffff;
+		overflow:hidden;
 	}
 	.add-tables{
 		width:9.66rem;
@@ -60,5 +67,10 @@
 	}
     .add-tables-cxt{
     	padding: 0.2rem;
+    }
+    .add-cxt-form{
+    	width:2.6rem;
+    	margin:0.25rem auto;
+    	height: 4.6rem;
     }
 </style>

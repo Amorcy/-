@@ -1,3 +1,6 @@
+<!--
+添加门店组件
+-->
 <template>
 	<div class="add-business">
 		<div class="add-cxt">
@@ -5,7 +8,13 @@
 		</div>
 		<div class="add-tables">
 			
-				<div>添加门店</div>
+				<div class="add-tables-cxt">
+					<Tables 
+					:bodyName="bodyName"
+                    :actionName="actionName"
+                    :resultSet="resultSet"
+					></Tables>
+				</div>
 			
 		</div>
 	</div>

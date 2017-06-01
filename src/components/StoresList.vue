@@ -1,3 +1,6 @@
+<!--
+添加商户组件
+-->
 <template>
 <div>
 	<ButtonGroup

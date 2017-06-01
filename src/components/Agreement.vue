@@ -1,3 +1,6 @@
+<!--
+协议组件
+-->
 <template>
 	    <Templates></Templates>
 </template>

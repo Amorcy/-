@@ -1,3 +1,6 @@
+<!--
+按钮组件
+-->
 <template>
    <div class="btnCxt">
    	

@@ -1,3 +1,6 @@
+<!--
+用户管理组件
+-->
 <template>
 	<div>
 		<Labels 

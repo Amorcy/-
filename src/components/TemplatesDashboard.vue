@@ -1,3 +1,6 @@
+<!--
+模板组件加载列表的组件 用于展示信息
+-->
 <template>
 	<div class="templates">
 		<div class="templates-items" v-for="(row,index) in 3">
