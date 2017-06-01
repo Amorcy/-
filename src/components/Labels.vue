@@ -20,7 +20,7 @@
 			<div class="babelSearch" v-if="hasSearch==true">
 				<div class="labelInput">
 					<input v-model="text"  type="text" name="searchTxt" v-bind:placeholder="title">
-					<i class="iconfont icon-sousuo_sousuo" v-on:click="search"></i>
+					<i class="iconfont icon-sousuo_sousuo" ></i>
 				</div>
 				<div class="labelInputTxt">
 					高级搜索
@@ -34,21 +34,14 @@
 <script>
 	export default {
 		name:'label',
-		props:['name','title','source','hasSearch'],
+		props:['name','title','hasSearch'],
 		data(){
 			return {
 				text:''
 			}
 		},
 		methods:{
-			search:function(){
-				var _url=this.source.url;
-				var _type=this.source.type;
-				var _cb=this.source.success;
-				fetch(_url+this.text).then((res)=>res.json()).then((res)=>{
-                    _cb(res);
-				});
-			}
+			
 		}
 	}
 

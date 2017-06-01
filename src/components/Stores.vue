@@ -7,67 +7,33 @@ author:dong.xie
 	     <Labels 
 	         :name="textName"
              :title="placeTxt"
-             :source="api"
              :hasSearch="true"
-
 	     ></Labels>
          <div class="tables">
-            <ButtonGroup
-             :btnList="btnList"
-            ></ButtonGroup>
-            <Tables
-              :bodyName="bodyName"
-              :actionName="actionName"
-              :resultSet="resultSet"
-            ></Tables>
+            <router-view></router-view>
          </div>
 	  </div>
 </template>
 <script>
 	import Labels from './Labels';
-	import Tables from './Tables';
-	import ButtonGroup from './ButtonGroup';
+	import StoresList from './StoresList';
 	export default {
 		 name:'stores',
 		 data(){
 		 	var _this=this;
 		 	return{
 		 		textName:'门店管理',
-		 		btnList:[
-		 		   {title:'添加门店',action:function(){
-		 		   	 alert('添加啊');
-		 		   },styles:{width:'0.75rem',backgroundColor:'rgb(51, 135, 255)',color:'#ffffff'}},
-
-		 		   {title:'添加品牌',action:function(){
-		 		   	 alert('添加啊');
-		 		   },styles:{width:'0.75rem',backgroundColor:'#ffffff',color:'#333333'}},
-
-		 		   {title:'批量导入门店',action:function(){
-		 		   	 alert('添加啊');
-		 		   },styles:{width:'1rem',backgroundColor:'#ffffff',color:'#333333'}},
-		 		],
-
 		 		placeTxt:'门面名称/门店编号',
-		 		bodyName:["门店编号","门店名称","所属省","管理模式","经营模式","品牌","联系人","联系电话","登录账户"],
-		 		actionName:[
-		 		{"txt":"禁用",actions:function(){
-                      alert('禁用');
-		 		}},
-		 		{"txt":"编辑",actions:function(){
-                      alert('编辑');
-		 		}}
-		 		],
-		 		resultSet:9,
 		 		
 		 	}
 		 },
-		 components:{Labels,Tables,ButtonGroup}
+		 components:{Labels}
 	}
 
 </script>
 <style>
 	
-	 .views>div{
+	.views>div{
     	width: 100%;height: 100%;
     }
 	.tables{

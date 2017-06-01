@@ -8,7 +8,7 @@
 	         :name="textName"
              :hasSearch="true"
              :title="title"
-             :callback="callback"
+             
 	     ></Labels>
 	     <div class="tables">
 			       <router-view></router-view>   
@@ -20,12 +20,10 @@
 
 <script>
 	import Labels from './Labels';
-	import Tables from './Tables';
-	import ButtonGroup from './ButtonGroup';
 	import Api from '../api/api';
 	export default {
 		 name:'dashboard',
-		 components:{Labels,Tables,ButtonGroup},
+		 components:{Labels},
 		 data(){
 		 	var  _this=this;
 		 	return {
@@ -58,9 +56,6 @@
 		        btnLabel:[{text:'今日新增',value:20},{text:'分销商总数',value:100}],
 		        labelIs:true,
 		        businessService:'http://101.200.79.3:8765/org/api/merchant/list',
-		        callback:function(urlName){
-
-		        }
 		 	}
 		 },
 		 mounted(){

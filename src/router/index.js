@@ -19,6 +19,8 @@ import VendorCheck from '@/components/VendorCheck';
 import BusinessCheck from '@/components/BusinessCheck';
 import BusinessList from '@/components/BusinessList';
 import AddBusiness from '@/components/AddBusiness';
+import StoresList from '@/components/StoresList';
+import AddStores from '@/components/AddStores';
 Vue.use(Router)
 
 export default new Router({
@@ -50,7 +52,13 @@ export default new Router({
           {path:'/setting',name:'setting',component:Setting,
             children:[
             {path:'/',name:'setting',component:Stores},
-            {path:'/setting/manageStores',name:'manageStores',component:Stores},
+            {path:'/setting/manageStores',name:'manageStores',component:Stores,
+                children:[
+                   {path:'/',name:'manageStores',component:StoresList},
+                    {path:'/setting/manageStores/add',name:'addStores',component:AddStores}
+                 ]
+ 
+            },
             {path:'/setting/manageDishes',name:'manageDishes',component:Dishes},
             {path:'/setting/rightRoles',name:'rightRoles',component:Rights},
             {path:'/setting/agreementTemplates',name:'agreementTemplates',component:Agreement},
