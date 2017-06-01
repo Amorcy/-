@@ -4,9 +4,9 @@
 			
 		</div>
 		<div class="add-tables">
-			<div class="add-tables-cxt">
+			
 				<div>添加门店</div>
-			</div>
+			
 		</div>
 	</div>
 </template>
