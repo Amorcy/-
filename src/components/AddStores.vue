@@ -5,12 +5,7 @@
 		</div>
 		<div class="add-tables">
 			<div class="add-tables-cxt">
-				<Tables
-              :bodyName="bodyName"
-              :actionName="actionName"
-              :resultSet="resultSet"
-              :isCheckBox="isCheckBox"
-            ></Tables>
+				<div>添加门店</div>
 			</div>
 		</div>
 	</div>
