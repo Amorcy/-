@@ -6,7 +6,7 @@
 	
 		<div class="tableCxt">
             <div class="tableCxtArea">
-            	<md-table v-once>
+            	   <md-table v-once>
 					  <md-table-header>
 					    <md-table-row>
 					      <md-table-head md-numeric v-for="(row,index) in bodyName" :key="index">{{row}}</md-table-head>
@@ -15,15 +15,38 @@
 					    </md-table-row>
 					  </md-table-header>
 
-					  <md-table-body>
+					  <md-table-body v-if="!hasRoles">
 					    <md-table-row v-for="(row, index) in 10" :key="index">
 					      <md-table-cell v-for="(col, index) in resultSet" :key="index"  md-numeric>10</md-table-cell>
 					      <md-table-cell class="actions">
 					          <div v-on:click="row.actions" 
 					           class="options" 
-					           v-for="(row,index) in actionName"  :key="index">{{row.txt}}</div></md-table-cell> 
+					           v-for="(row,index) in actionName"  :key="index" :style="row.txtColor">{{row.txt}}</div></md-table-cell> 
 					    </md-table-row>
 					  </md-table-body>
+                      
+                       <md-table-body v-else>
+					    <md-table-row v-for="(row,index) in roleList">
+					      <md-table-cell  md-numeric>
+					      	   {{row.id}}
+					      </md-table-cell>
+                          <md-table-cell  md-numeric>
+                          	   {{row.roleName}}
+                          </md-table-cell>
+                          <md-table-cell  md-numeric>
+                          	  <md-checkbox  v-for="(rows,i) in row.roleDesc" name="my-test2"  class="md-primary md-primary-cellrows">{{rows}}</md-checkbox>
+                          </md-table-cell>
+                          <md-table-cell  md-numeric>
+                          	  {{row.roles}}
+                          </md-table-cell>
+					      <md-table-cell class="actions">
+					          <div v-on:click="row.actions"
+					           class="options"
+					           v-for="(row,index) in actionName"  :key="index" :style="row.txtColor">{{row.txt}}</div></md-table-cell> 
+					    </md-table-row>
+					  </md-table-body>
+
+
 					</md-table>
 
 
@@ -55,7 +78,7 @@
 <script>
 	export default {
 		name:'tables',
-		props:['bodyName','actionName','resultSet','cellStyle'],
+		props:['bodyName','actionName','resultSet','cellStyle','hasRoles','roleList'],
 		data(){
 			return {
                   
@@ -148,6 +171,9 @@
    }
    .md-table .md-table-cell.md-numeric .md-table-cell-container{
    	 justify-content: center;
+   }
+   .md-primary-cellrows{
+   	margin-right:0.2rem;
    }
 
 

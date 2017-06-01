@@ -28,7 +28,7 @@ author:dong.xie
 	import Tables from './Tables';
 	import ButtonGroup from './ButtonGroup';
 	export default {
-		 name:'label',
+		 name:'stores',
 		 data(){
 		 	var _this=this;
 		 	return{

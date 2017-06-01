@@ -19,6 +19,8 @@
               :bodyName="bodyName"
               :actionName="actionName"
               :resultSet="resultSet"
+              :hasRoles="hasRoles"
+              :roleList="roleList"
             ></Tables>
          </div>
 
@@ -35,15 +37,15 @@
 		 data(){
 		 	return {
 		 		textName:'角色管理',
+		 		hasRoles:true,
 		 		title:'权益编号/权益名称/状态',
 		 		bodyName:["编号","角色名称","角色描述","角色权限"],
 		 		actionName:[
-		 		
-		 		{"txt":"编辑",actions:function(){
+		 		{"txt":"编辑",txtColor:{color:'rgb(51, 135, 255)'},actions:function(){
                       alert('编辑');
 		 		}},
-		 		{"txt":"停用",actions:function(){
-                      alert('停用');
+		 		{"txt":"删除",txtColor:{color:'red'},actions:function(){
+                      alert('删除');
 		 		}}
 		 		],
 		 		resultSet:4,
@@ -53,7 +55,17 @@
 		           },styles:{width:'0.75rem',backgroundColor:'rgb(51, 135, 255)',color:'#ffffff'}}
 		        ],
 		        btnLabel:[{text:'今日新增',value:20},{text:'分销商总数',value:100}],
-		        labelIs:false
+		        labelIs:false,
+		        roleList:[
+		           {id:1,roleName:'超级管理员',roleDesc:["概览","分销商","核销","商户","设置"],roles:'启用'},
+                    {id:2,roleName:'管理员',roleDesc:["概览","分销商"],roles:'启用'},
+                     {id:3,roleName:'商户',roleDesc:["概览","分销商","核销","商户","设置"],roles:'启用'},
+                      {id:4,roleName:'销售',roleDesc:["核销","商户","设置"],roles:'启用'},
+                       {id:5,roleName:'财务',roleDesc:["概览","商户","设置"],roles:'启用'},
+                        {id:6,roleName:'地主',roleDesc:["商户","设置"],roles:'启用'},
+                         {id:7,roleName:'小地主',roleDesc:["设置"],roles:'启用'},
+
+		        ]
 		 	}
 		 } 
 	}
