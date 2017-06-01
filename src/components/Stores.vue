@@ -50,21 +50,15 @@ author:dong.xie
 		 		placeTxt:'门面名称/门店编号',
 		 		bodyName:["门店编号","门店名称","所属省","管理模式","经营模式","品牌","联系人","联系电话","登录账户"],
 		 		actionName:[
-		 		{"txt":"编辑",actions:function(){
+		 		{"txt":"禁用",actions:function(){
                       alert('禁用');
 		 		}},
-		 		{"txt":"协议",actions:function(){
+		 		{"txt":"编辑",actions:function(){
                       alert('编辑');
 		 		}}
 		 		],
 		 		resultSet:9,
-		 		api:{
-		 			url:'https://www.baidu.com/s?ie=utf-8&mod=11&isbd=1&isid=C766E1F407116111&ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=',
-		 			type:'get',
-		 			success:function(data){
-		 				console.log(this);
-		 			}
-		 		}
+		 		
 		 	}
 		 },
 		 components:{Labels,Tables,ButtonGroup}

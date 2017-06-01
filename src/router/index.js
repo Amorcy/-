@@ -17,6 +17,8 @@ import Users from '@/components/Users'
 
 import VendorCheck from '@/components/VendorCheck';
 import BusinessCheck from '@/components/BusinessCheck';
+import BusinessList from '@/components/BusinessList';
+import AddBusiness from '@/components/AddBusiness';
 Vue.use(Router)
 
 export default new Router({
@@ -32,7 +34,11 @@ export default new Router({
     	component:Index,
       children:[
           {path:'/',name:'summery',component:DashBoard},
-          {path:'/business',name:'business',component:Business},
+          {path:'/business',name:'business',component:Business,
+              children:[
+                  {path:'/',name:'business',component:BusinessList},
+                  {path:'/business/add',name:'addBusiness',component:AddBusiness},
+              ]},
           {path:'/sales',name:'sales',component:Sales},
           {path:'/check',name:'check',component:CheckSale,
             children:[

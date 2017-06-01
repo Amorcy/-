@@ -61,6 +61,14 @@ var Api=(()=>{
        s=s.substring(0,length-1);
        return s;
    }
+   var getLocalStorage=function(){
+       return localStorage;
+   }
+   var getToken=function(){
+    var _token=Api.readToken('token_type')+' '+Api.readToken('access_token');
+    return _token;
+   }
+   
 
    return {
    	saveToken:saveToken,
@@ -69,7 +77,9 @@ var Api=(()=>{
    	saveUserInfo:saveUserInfo,
    	readUserInfo:readUserInfo,
    	updateUserInfo:updateUserInfo,
-   	formFormat:formFormat
+   	formFormat:formFormat,
+    getLocalStorage:getLocalStorage,
+    getToken:getToken
    }
 
 })();

@@ -3,31 +3,31 @@
 作者:dong.xie
 -->
 <template>
-	<div>
-		<Labels 
-	         :name="textName"
-             :hasSearch="true"
-             :title="title"
-             :callback="callback"
-	     ></Labels>
-	     <div class="tables">
-			       <router-view></router-view>   
-		 </div>
-	     
+<div>
+       <ButtonGroup
+		             :btnList="btnList"
+		             :btnLabel="btnLabel"
+		             :labelIs="labelIs"
+		            ></ButtonGroup>
+		<Tables
+              :bodyName="bodyName"
+              :actionName="actionName"
+              :resultSet="resultSet"
+              :isCheckBox="isCheckBox"
+            ></Tables>
 
-	</div>
+		            
+    </div>     
 </template>
 
 <script>
-	import Labels from './Labels';
 	import Tables from './Tables';
 	import ButtonGroup from './ButtonGroup';
-	import Api from '../api/api';
 	export default {
-		 name:'dashboard',
-		 components:{Labels,Tables,ButtonGroup},
+		 name:'businesslist',
+		 components:{Tables,ButtonGroup},
 		 data(){
-		 	var  _this=this;
+		 	var _this=this;
 		 	return {
 		 		textName:'商户管理',
 		 		title:'商户名称/商户编号',
@@ -45,7 +45,7 @@
 		 		isCheckBox:true,
 		 		btnList:[
 		           {title:'添加商户',action:function(){
-		             _this.$router.push({name:'addBusiness'});
+		              _this.$router.push({name:'addBusiness'});
 		           },styles:{width:'0.75rem',backgroundColor:'#2196f3',color:'#ffffff'}},
 
 		           {title:'批量续签',action:function(){
@@ -57,27 +57,8 @@
 		        ],
 		        btnLabel:[{text:'今日新增',value:20},{text:'分销商总数',value:100}],
 		        labelIs:true,
-		        businessService:'http://101.200.79.3:8765/org/api/merchant/list',
-		        callback:function(urlName){
-
-		        }
+		        businessService:'http://101.200.79.3:8765/org/api/merchant/list'
 		 	}
-		 },
-		 mounted(){
-		 	 //设置默认请求数据量
-		 	 var _body={page:1,size:10};
-		 	 var _token=Api.getToken();
-		 	 //设置请求头部
-		 	 var _options={
-		 	 	headers:{ 
-                           'Content-Type':'application/x-www-form-urlencoded',
-                           'Authorization':_token
-                            }
-		 	 }
-		 	 //发送请求
-		 	 this.$http.post(this.businessService,Api.formFormat(_body),_options).then((res)=>res.json()).then((response)=>{
-                console.log(response);
-		 	 });
 		 }
 	}
 </script>

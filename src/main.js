@@ -25,5 +25,9 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App }
+  components: { App },
 })
+
+//设置ajax请求基本url
+
+

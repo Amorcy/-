@@ -35,6 +35,7 @@
 	export default {
 		name:'Login',
     data(){
+      console.log(this);
       return {
         msg:'xxxx',
         username:'',
@@ -42,6 +43,7 @@
         styles:{width:'2.4rem'},
         baseToken:'Basic eW1zLWFwaTpSVUtUVEpFSk84SFRSQlhIS09MUA==',
         newestToken:'',
+        refreshToken:'',
         LoginService:'http://101.200.79.3:8765/uaa/oauth/token'
         
       }
@@ -59,10 +61,21 @@
                                    'Authorization':this.baseToken
                                  }
                 };
-           this.$http.post(this.LoginService,Api.formFormat(_body),options).then((res)=>{
-                console.log(res);
-           });
-           //this.$router.push({name:'Index'});
+           this.$http.post(this.LoginService,Api.formFormat(_body),options).then((res)=>res.json()).then((response)=>{
+              if(response){
+                 var _local=Api.getLocalStorage();
+                   this.newestToken=response.token_type+" "+response.access_token;
+                   this.refreshToken=response.refresh_token;
+                   //将token信息保存到本地
+                   var msg=Api.saveToken(response);
+                  //跳转
+                  this.$router.push({name:'summery'});
+              
+              }else{
+
+              }
+               });
+           
         }
     
     }
