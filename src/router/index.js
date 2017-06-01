@@ -21,6 +21,8 @@ import BusinessList from '@/components/BusinessList';
 import AddBusiness from '@/components/AddBusiness';
 import StoresList from '@/components/StoresList';
 import AddStores from '@/components/AddStores';
+import SalesList from '@/components/SalesList';
+import SalesInvite from '@/components/SalesInvite';
 Vue.use(Router)
 
 export default new Router({
@@ -41,7 +43,12 @@ export default new Router({
                   {path:'/',name:'business',component:BusinessList},
                   {path:'/business/add',name:'addBusiness',component:AddBusiness},
               ]},
-          {path:'/sales',name:'sales',component:Sales},
+          {path:'/sales',name:'sales',component:Sales,children:
+          [
+             {path:'/',name:'sales',component:SalesList},
+             {path:'sales/invite',name:'salesInvite',component:SalesInvite},
+             ]
+          },
           {path:'/check',name:'check',component:CheckSale,
             children:[
             {path:'/',name:'vendorCheck',component:VendorCheck},

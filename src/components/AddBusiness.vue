@@ -25,18 +25,15 @@
 				
 				
 				<div class="cxt-form-items">
-				   
+				    <span class="form-items-starts" :style="{color:'#ffffff'}">*</span>
 					<label class="form-label">地址</label>
-                    <select class="form-input">
-                    	<option>北京</option>
-                    	<option>上海</option>
-                    	<option>天津</option>
-                    	<option>广州</option>
-                    	<option>深圳</option>
-                    </select>  
+                    <div class="form-address">
+                        <input class="address-txt"></input>
+                        <i class="iconfont icon-tubiao10"></i>
+                    </div>
 				</div>
 				<div class="cxt-form-items">
-				    
+				     <span class="form-items-starts" :style="{color:'#ffffff'}">*</span>
 					<label class="form-label"></label>
                     <input class="form-input" placeholder="详细地址" type="text"/>
 				</div>
@@ -217,5 +214,20 @@
 	    font-size: 13px;
 	        line-height: 0.24rem;
 	}
+    .form-address{
+        width:1.6rem;
+        height:0.28rem;
+        border-radius:4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border:1px solid #dddddd;
+    }
+    .address-txt{
+        width:1.2rem;
+        height:0.24rem;
+        outline: none;
+        border: none;
+    }
 
 </style>

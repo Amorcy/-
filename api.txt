@@ -108,3 +108,6 @@
 
                         this.$router.push({name:'setting'});
                        break;
+//https://www.npmjs.com/package/smooth-scrollbar
+
+
