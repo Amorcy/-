@@ -62,9 +62,9 @@ export default new Router({
             {path:'/setting/manageStores',name:'manageStores',component:Stores,
                 children:[
                    {path:'/',name:'manageStores',component:StoresList},
-                    {path:'/setting/manageStores/add',name:'addStores',component:AddStores}
+                   {path:'/setting/manageStores/add',name:'addStores',component:AddStores}
                  ]
- 
+
             },
             {path:'/setting/manageDishes',name:'manageDishes',component:Dishes},
             {path:'/setting/rightRoles',name:'rightRoles',component:Rights},
