@@ -12,6 +12,7 @@ import Dishes from '@/components/Dishes'
 import Rights from '@/components/Rights'
 import Roles from '@/components/Roles'
 import Agreement from '@/components/Agreement'
+import AddAgreement from '@/components/AddAgreement';
 import Seller from '@/components/Seller'
 import Users from '@/components/Users'
 
@@ -19,6 +20,7 @@ import VendorCheck from '@/components/VendorCheck';
 import BusinessCheck from '@/components/BusinessCheck';
 import BusinessList from '@/components/BusinessList';
 import AddBusiness from '@/components/AddBusiness';
+import EditBusiness from '@/components/EditBusiness';
 import StoresList from '@/components/StoresList';
 import AddStores from '@/components/AddStores';
 import SalesList from '@/components/SalesList';
@@ -42,6 +44,8 @@ export default new Router({
               children:[
                   {path:'/',name:'business',component:BusinessList},
                   {path:'/business/add',name:'addBusiness',component:AddBusiness},
+                  {path:'/business/edit/:id',name:'editBusiness',component:EditBusiness},
+                  {path:'/business/addAgree',name:'addAgree',component:AddAgreement}
               ]},
           {path:'/sales',name:'sales',component:Sales,children:
           [

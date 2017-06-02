@@ -1,5 +1,5 @@
 <!--
-添加商户组件
+编辑商户组件
 -->
 <template>
 	<div class="add-business">
@@ -94,7 +94,7 @@
         	    bodyName:["商户编号","商户名称","商户类型","门店数","协议周期","签约时间","协议状态"],
 		 		actionName:[
 		 		{"txt":"编辑",actions:function(){
-                       _this.$router.push({
+                      _this.$router.push({
                           name:'editBusiness',
                           params:{id:1}
                       });

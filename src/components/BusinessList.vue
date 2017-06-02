@@ -35,10 +35,15 @@
 		 		cellStyle:{textAlign:'center',paddingRight:'0.6rem'},
 		 		actionName:[
 		 		{"txt":"编辑",actions:function(){
-                      alert('详细');
+                      _this.$router.push({
+                      	  name:'editBusiness',
+                      	  params:{id:1}
+                      });
 		 		}},
 		 		{"txt":"协议",actions:function(){
-                      alert('详细');
+                      _this.$router.push({
+                      	  name:'addAgree'
+                      });
 		 		}},
 		 		],
 		 		resultSet:7,
