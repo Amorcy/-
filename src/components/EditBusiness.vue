@@ -1,5 +1,5 @@
 <!--
-添加商户组件
+编辑商户组件
 -->
 <template>
 	<div class="add-business">
@@ -21,9 +21,9 @@
 					<label class="form-label">门店名称</label>
                     <input   class="form-input" type="text"/>
 				</div>
-
-
-
+				
+				
+				
 				<div class="cxt-form-items">
 				    <span class="form-items-starts" :style="{color:'#ffffff'}">*</span>
 					<label class="form-label">地址</label>
@@ -94,7 +94,7 @@
         	    bodyName:["商户编号","商户名称","商户类型","门店数","协议周期","签约时间","协议状态"],
 		 		actionName:[
 		 		{"txt":"编辑",actions:function(){
-                       _this.$router.push({
+                      _this.$router.push({
                           name:'editBusiness',
                           params:{id:1}
                       });
@@ -120,7 +120,7 @@
  	 methods:{
  	 	addBusiness:function(){
  	 		 var options={
-                 headers:{
+                 headers:{ 
                                    'Content-Type':'application/x-www-form-urlencoded',
                                    'Authorization':Api.getToken()
                                  }
@@ -131,7 +131,7 @@
               	   accountName:this.accountName,
               	   accountPassword:this.accountPassword,
                    orgForm:this.orgForm
-              };
+              };  
  	 		this.$http.post(this.ADD_SERVICE,Api.formFormat(body),options).then((res)=>res.json()).then((res)=>{
  	 			  console.log(res);
  	 		});
@@ -185,7 +185,7 @@
         height: 0.28rem;
         border:1px solid #dddddd;
         border-radius:4px;
-
+        
     }
     .form-items-starts{
     	width:0.14rem;
@@ -208,7 +208,7 @@
     	width:1.6rem;
     	height:0.54rem;
     	display: flex;justify-content: space-between;
-
+    	
     }
     .sub-btn,.sub-reset{
     	width:0.7rem;
