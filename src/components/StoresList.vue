@@ -28,7 +28,9 @@ import ButtonGroup from './ButtonGroup';
 		 		   },styles:{width:'0.75rem',backgroundColor:'rgb(51, 135, 255)',color:'#ffffff'}},
 
 		 		   {title:'添加品牌',action:function(){
-		 		   	 alert('dddd');
+		 		   	  //跳转到添加品牌页面
+		 		   	 _this.$router.push({name:'addBrands'});
+
 		 		   },styles:{width:'0.75rem',backgroundColor:'#ffffff',color:'#333333'}},
 
 		 		   {title:'批量导入门店',action:function(){

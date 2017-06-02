@@ -25,6 +25,13 @@ import StoresList from '@/components/StoresList';
 import AddStores from '@/components/AddStores';
 import SalesList from '@/components/SalesList';
 import SalesInvite from '@/components/SalesInvite';
+
+import AddBrands from '@/components/AddBrands';
+
+import DishesList from '@/components/DishesList';
+
+import AddDishes from '@/components/AddDishes';
+
 Vue.use(Router)
 
 export default new Router({
@@ -66,11 +73,17 @@ export default new Router({
             {path:'/setting/manageStores',name:'manageStores',component:Stores,
                 children:[
                    {path:'/',name:'manageStores',component:StoresList},
-                   {path:'/setting/manageStores/add',name:'addStores',component:AddStores}
+                   {path:'/setting/manageStores/add',name:'addStores',component:AddStores},
+                   {path:'/setting/manageStores/addBrands',name:'addBrands',component:AddBrands}
                  ]
 
             },
-            {path:'/setting/manageDishes',name:'manageDishes',component:Dishes},
+            {path:'/setting/manageDishes',name:'manageDishes',component:Dishes,
+               children:[
+                  {path:'/',name:'manageDishes',component:DishesList},
+                  {path:'/setting/manageDishes/addDishes',name:'addDishes',component:AddDishes}
+               ]
+            },
             {path:'/setting/rightRoles',name:'rightRoles',component:Rights},
             {path:'/setting/agreementTemplates',name:'agreementTemplates',component:Agreement},
             {path:'/setting/discountUsers',name:'discountUsers',component:Seller},
