@@ -10,49 +10,21 @@
              :title="title"
 	     ></Labels>
 	      <div class="tables">
-	        <ButtonGroup
-             :btnList="btnList"
-             :btnLabel="btnLabel"
-             :labelIs="labelIs"
-            ></ButtonGroup>
-            <Tables
-              :bodyName="bodyName"
-              :actionName="actionName"
-              :resultSet="resultSet"
-            ></Tables>
-         </div>
+	          <router-view></router-view>
+          </div>
 
 	</div>
 </template>
 
 <script>
 	import Labels from './Labels';
-	import Tables from './Tables';
-	import ButtonGroup from './ButtonGroup';
 	export default {
 		 name:'dashboard',
-		 components:{Labels,Tables,ButtonGroup},
+		 components:{Labels},
 		 data(){
 		 	return {
-		 		textName:'菜品管理',
-		 		title:'菜品名称/菜品编号',
-		 		bodyName:["菜品编号","菜品名称","菜品缩写","图片"],
-		 		actionName:[
-		 		{"txt":"审核",actions:function(){
-                      alert('审核');
-		 		}},
-		 		{"txt":"停用",actions:function(){
-                      alert('停用');
-		 		}}
-		 		],
-		 		resultSet:4,
-		 		btnList:[
-		           {title:'添加菜品',action:function(){
-		             alert('添加啊');
-		           },styles:{width:'0.75rem',backgroundColor:'rgb(51, 135, 255)',color:'#ffffff'}}
-		        ],
-		        btnLabel:[{text:'今日新增',value:20},{text:'分销商总数',value:100}],
-		        labelIs:false
+		 		 textName:'菜品管理',
+		 		 title:'菜品名称/菜品编号',
 		 	}
 		 } 
 	}

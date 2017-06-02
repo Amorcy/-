@@ -1,16 +1,19 @@
 <!--
-描述:登录成功商户
+描述:菜品管理组件
 作者:dong.xie
 -->
 <template>
-	<div>
-		<Labels 
-	         :name="textName"
-             :hasSearch="true"
-             :title="title"
-	     ></Labels>
-	      <div class="tables">
-	        <router-view></router-view>
+	<div> 
+	      <ButtonGroup
+             :btnList="btnList"
+             :btnLabel="btnLabel"
+             :labelIs="labelIs"
+            ></ButtonGroup>
+            <Tables
+              :bodyName="bodyName"
+              :actionName="actionName"
+              :resultSet="resultSet"
+            ></Tables>
          </div>
 
 	</div>
@@ -22,24 +25,26 @@
 	import ButtonGroup from './ButtonGroup';
 	export default {
 		 name:'dashboard',
-		 components:{Labels},
+		 components:{Labels,Tables,ButtonGroup},
 		 data(){
+		 	var _this=this;
 		 	return {
-		 		textName:'分销商/商户权益',
-		 		title:'权益编号/权益名称/状态',
-		 		bodyName:["权益编号","权益名称","权益内容","返佣占比","返佣方式","状态"],
+		 		
+		 		bodyName:["菜品编号","菜品名称","菜品缩写","图片"],
 		 		actionName:[
+		 		{"txt":"审核",actions:function(){
+                      alert('审核');
+		 		}},
 		 		{"txt":"停用",actions:function(){
                       alert('停用');
-		 		}},
-		 		{"txt":"编辑",actions:function(){
-                      alert('编辑');
 		 		}}
 		 		],
-		 		resultSet:6,
+		 		resultSet:4,
 		 		btnList:[
-		           {title:'添加权益',action:function(){
-		             alert('添加啊');
+		           {title:'添加菜品',action:function(){
+		              _this.$router.push({
+		              	  name:'addDishes'
+		              });
 		           },styles:{width:'0.75rem',backgroundColor:'rgb(51, 135, 255)',color:'#ffffff'}}
 		        ],
 		        btnLabel:[{text:'今日新增',value:20},{text:'分销商总数',value:100}],

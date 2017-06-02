@@ -3,7 +3,7 @@
 作者:dong.xie
 -->
 <template>
-	
+
 		<div class="tableCxt">
             <div class="tableCxtArea">
             	   <md-table v-once>
@@ -13,21 +13,30 @@
 					      	  <md-checkbox   name="my-test2"  class="md-primary md-primary-cellrows"></md-checkbox>
 					      </md-table-head>
 					      <md-table-head md-numeric v-for="(row,index) in bodyName" :key="index">{{row}}</md-table-head>
-					      <md-table-head md-numeric>操作</md-table-head>
+					      <md-table-head md-numeric>操11作</md-table-head>
 					    </md-table-row>
 					  </md-table-header>
 
 					  <md-table-body v-if="!hasRoles">
-					    <md-table-row v-for="(row, index) in 10" :key="index">
+					    <md-table-row v-for="(row, index) in resultSet" :key="index">
 					      <md-table-cell v-if="isCheckBox"><md-checkbox   name="my-test2"  class="md-primary md-primary-cellrows"></md-checkbox></md-table-cell>
-					      <md-table-cell v-for="(col, index) in resultSet" :key="index"  md-numeric>10</md-table-cell>
+					      <!--<md-table-cell v-for="(col, index) in resultSet" :key="index"  md-numeric>10</md-table-cell>-->
+                <md-table-cell>{{row.id}}</md-table-cell>
+                <md-table-cell>{{row.orgName}}</md-table-cell>
+                <md-table-cell>{{row.provinceName}}</md-table-cell>
+                <md-table-cell>{{row.storesType}}</md-table-cell>
+                <md-table-cell>{{row.curStatus}}</md-table-cell>
+                <md-table-cell>{{row.orgForm}}</md-table-cell>
+                <md-table-cell>{{row.cityName}}</md-table-cell>
+                <md-table-cell>{{row.cityName}}</md-table-cell>
+                <md-table-cell>{{row.cityName}}</md-table-cell>
 					      <md-table-cell class="actions">
-					          <div v-on:click="row.actions" 
-					           class="options" 
-					           v-for="(row,index) in actionName"  :key="index" :style="row.txtColor">{{row.txt}}</div></md-table-cell> 
+					          <div v-on:click="row.actions"
+					           class="options"
+					           v-for="(row,index) in actionName"  :key="index" :style="row.txtColor">{{row.txt}}</div></md-table-cell>
 					    </md-table-row>
 					  </md-table-body>
-                      
+
                        <md-table-body v-else>
 					    <md-table-row v-for="(row,index) in roleList">
 					      <md-table-cell  md-numeric>
@@ -45,7 +54,7 @@
 					      <md-table-cell class="actions">
 					          <div v-on:click="row.actions"
 					           class="options"
-					           v-for="(row,index) in actionName"  :key="index" :style="row.txtColor">{{row.txt}}</div></md-table-cell> 
+					           v-for="(row,index) in actionName"  :key="index" :style="row.txtColor">{{row.txt}}</div></md-table-cell>
 					    </md-table-row>
 					  </md-table-body>
 
@@ -55,7 +64,7 @@
 
             </div>
 
-			
+
             <div class="pagution">
                <div class="pagution-cxt">
                     <md-button class="md-button md-raised">
@@ -72,21 +81,26 @@
                     <md-button class="md-button md-raised">
 					   >
 					</md-button>
-                </div>	
+                </div>
             </div>
-		
+
 	</div>
 </template>
 
 <script>
 	export default {
 		name:'tables',
-		props:['bodyName','actionName','resultSet','cellStyle','hasRoles','roleList','isCheckBox'],
+		props:['bodyName','actionName','resultSet','cellStyle','hasRoles','roleList','isCheckBox','isStore'],
 		data(){
+		    console.log(this.resultSet);
 			return {
-                  
+
 			}
-		}
+		},
+
+		created(){
+      console.log(this.resultSet);
+    }
 	}
 
 </script>
@@ -115,7 +129,7 @@
 		position: absolute;
 		bottom: 0rem;
 	}
-	
+
 	.pagution-cxt{
 		 position: absolute;
 		 bottom: 0px;
@@ -131,10 +145,10 @@
     width: 0.28rem;
     height: 0.28rem;
     font-size: 0.16rem;
-    min-width: 0px; 
-    min-height: 0px; 
-    margin: 0px 0px; 
-    padding: 0 0px; 
+    min-width: 0px;
+    min-height: 0px;
+    margin: 0px 0px;
+    padding: 0 0px;
     line-height: 0.24rem;
     text-align: center;
     color: #333333;
@@ -178,11 +192,11 @@
    .md-primary-cellrows{
    	margin-right:0.2rem;
    }
-   
+
    .md-table .md-table-head-text {
     overflow:visible;
    }
-   
+
    .md-table .md-table-head-container {
     height: 56px;
     padding: 14px 0;

@@ -12,6 +12,7 @@ import Dishes from '@/components/Dishes'
 import Rights from '@/components/Rights'
 import Roles from '@/components/Roles'
 import Agreement from '@/components/Agreement'
+import AddAgreement from '@/components/AddAgreement';
 import Seller from '@/components/Seller'
 import Users from '@/components/Users'
 
@@ -19,10 +20,21 @@ import VendorCheck from '@/components/VendorCheck';
 import BusinessCheck from '@/components/BusinessCheck';
 import BusinessList from '@/components/BusinessList';
 import AddBusiness from '@/components/AddBusiness';
+import EditBusiness from '@/components/EditBusiness';
 import StoresList from '@/components/StoresList';
 import AddStores from '@/components/AddStores';
 import SalesList from '@/components/SalesList';
 import SalesInvite from '@/components/SalesInvite';
+
+import AddBrands from '@/components/AddBrands';
+
+import DishesList from '@/components/DishesList';
+
+import AddDishes from '@/components/AddDishes';
+
+import RightsList from '@/components/RightsList';
+
+import AddRights from '@/components/AddRights';
 Vue.use(Router)
 
 export default new Router({
@@ -42,6 +54,8 @@ export default new Router({
               children:[
                   {path:'/',name:'business',component:BusinessList},
                   {path:'/business/add',name:'addBusiness',component:AddBusiness},
+                  {path:'/business/edit/:id',name:'editBusiness',component:EditBusiness},
+                  {path:'/business/addAgree',name:'addAgree',component:AddAgreement}
               ]},
           {path:'/sales',name:'sales',component:Sales,children:
           [
@@ -62,12 +76,23 @@ export default new Router({
             {path:'/setting/manageStores',name:'manageStores',component:Stores,
                 children:[
                    {path:'/',name:'manageStores',component:StoresList},
-                    {path:'/setting/manageStores/add',name:'addStores',component:AddStores}
+                   {path:'/setting/manageStores/add',name:'addStores',component:AddStores},
+                   {path:'/setting/manageStores/addBrands',name:'addBrands',component:AddBrands}
                  ]
- 
+
             },
-            {path:'/setting/manageDishes',name:'manageDishes',component:Dishes},
-            {path:'/setting/rightRoles',name:'rightRoles',component:Rights},
+            {path:'/setting/manageDishes',name:'manageDishes',component:Dishes,
+               children:[
+                  {path:'/',name:'manageDishes',component:DishesList},
+                  {path:'/setting/manageDishes/addDishes',name:'addDishes',component:AddDishes}
+               ]
+            },
+            {path:'/setting/rightRoles',name:'rightRoles',component:Rights,
+                 children:[
+                       {path:'/',name:'rightRoles',component:RightsList},
+                       {path:'/setting/rightRoles/AddRights',name:'AddRights',component:AddRights}
+                 ]
+             },
             {path:'/setting/agreementTemplates',name:'agreementTemplates',component:Agreement},
             {path:'/setting/discountUsers',name:'discountUsers',component:Seller},
             {path:'/setting/manageUsers',name:'manageUsers',component:Users},

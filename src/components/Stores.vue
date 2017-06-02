@@ -4,7 +4,7 @@ author:dong.xie
 -->
 <template>
 	 <div>
-	     <Labels 
+	     <Labels
 	         :name="textName"
              :title="placeTxt"
              :hasSearch="true"
@@ -24,7 +24,7 @@ author:dong.xie
 		 	return{
 		 		textName:'门店管理',
 		 		placeTxt:'门面名称/门店编号',
-		 		
+
 		 	}
 		 },
 		 components:{Labels}
@@ -32,7 +32,7 @@ author:dong.xie
 
 </script>
 <style>
-	
+
 	.views>div{
     	width: 100%;height: 100%;
     }
@@ -43,5 +43,6 @@ author:dong.xie
 		height:-webkit-calc(100% - 1.13rem);
     	background-color: rgb(237,237,237);
     	overflow:scroll;
+
 	}
 </style>

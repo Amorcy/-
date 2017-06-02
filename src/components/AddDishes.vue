@@ -1,81 +1,54 @@
 <!--
-添加商户组件
+添加菜品组件
 -->
 <template>
 	<div class="add-business">
 		<div class="add-cxt">
+			<div class="add-brands-menu">
       <form action="" class="form">
-        <div class="input-tip"></div>
         <div class="store-list">
-          <span class="store-left">商户类型:</span><span class="store-choose">
-            <span>
-              <input type="radio" id="direct" name="store-model" value="直营"><label for="direct">直营</label>
-            </span>
-            <span>
-              <input type="radio" id="join" name="store-model" value="加盟" checked><label for="join">加盟</label>
-            </span>
-          </span>
-        </div>
-        <div class="store-list">
-          <span class="store-left">商户名称:</span><span class="store-right">
+          <span class="store-left">品牌编号:</span><span class="store-right">
             <input type="text" name="store-num" placeholder="输入门店编号">
           </span>
         </div>
         <div class="input-tip"></div>
         <div class="store-list">
-          <span class="store-left">门店名称:</span><span class="store-right">
+          <span class="store-left">品牌名称:</span><span class="store-right">
             <input type="text" name="store-name" placeholder="输入门店名称">
+          </span>
+        </div>
+        <div class="input-tip"></div>
+        <div class="store-list">
+          <span class="store-left">菜品缩写:</span><span class="store-right">
+            <input type="text" name="store-name" placeholder="输入门店名称">
+          </span>
+        </div>
+        <div class="input-tip"></div>
+        <div class="store-list store-pic">
+          <span class="store-left">菜品图片:</span><span class="store-right">
+            <span class="upload-pic">
+              <p>+</p>
+              <p>上传照片</p>
+            </span>
+            <span class="upload-explain">
+              <p>图片需1M以内</p>
+              <p>最佳尺寸: 300*400px</p>
+              <p>最多可添加5张</p>
+            </span>
           </span>
         </div>
         
         <div class="input-tip"></div>
         <div class="store-list">
-          <span class="store-left">地址：</span><span class="store-right">
-            <select name="">
-              <option value="volvo" selected>请选择</option>
-              <option value="saab">1</option>
-            </select>
-          </span>
-        </div>
-        <div class="input-tip"></div>
-        <div class="store-list">
-          <span class="store-left">&nbsp</span><span class="store-right">
-            <input type="text" name="" placeholder="详细地址">
-          </span>
-        </div>
-         <div class="input-tip"></div>
-        <div class="store-list">
-          <span class="store-left">联系人:</span><span class="store-right">
-            <input type="text" name="store-name" placeholder="联系人">
-          </span>
-        </div>
-        <div class="input-tip"></div>
-        <div class="store-list">
-          <span class="store-left">联系方式:</span><span class="store-right">
-            <input type="text" name="store-name" placeholder="联系方式">
-          </span>
-        </div>
-        <div class="input-tip"></div>
-        <div class="store-list">
-          <span class="store-left">账号名称:</span><span class="store-right">
-            <input type="text" name="store-name" placeholder="账号名称">
-          </span>
-        </div>
-        <div class="input-tip"></div>
-        <div class="store-list">
-          <span class="store-left">初始密码:</span><span class="store-right">
-            <input type="text" name="store-name" placeholder="初始密码">
-          </span>
-        </div>
-        <div class="input-tip"></div>
-        <div class="store-list">
           <span class="store-left">&nbsp</span><span class="store-right vertify">
-              <button>保存</button>
-              <button>重置</button>
+             <md-button  @click.native="addBusiness" class="md-raised md-primary sub-btn">保存</md-button>
+            <md-button class="md-raised md-dense sub-reset">重置</md-button>
           </span>
         </div>
       </form>
     </div>
+		
+		</div>
 		<div class="add-tables">
 			<div class="add-tables-cxt">
 				<Tables
@@ -98,21 +71,16 @@
  	 data(){
         var _this=this;
         return {
-        	    bodyName:["商户编号","商户名称","商户类型","门店数","协议周期","签约时间","协议状态"],
-		 		actionName:[
-		 		{"txt":"编辑",actions:function(){
-                       _this.$router.push({
-                          name:'editBusiness',
-                          params:{id:1}
-                      });
-		 		}},
-		 		{"txt":"协议",actions:function(){
-                       _this.$router.push({
-                          name:'addAgree'
-                      });
-		 		}},
-		 		],
-		 		resultSet:7,
+        	   bodyName:["菜品编号","菜品名称","菜品缩写","图片"],
+        actionName:[
+        {"txt":"审核",actions:function(){
+                      alert('审核');
+        }},
+        {"txt":"停用",actions:function(){
+                      alert('停用');
+        }}
+        ],
+		 		resultSet:4,
 		 		isCheckBox:false,
 		 		orgForm:false,
                 //orgForm类型  1连锁 2 单店
@@ -121,7 +89,7 @@
                 orgName:'',
                 accountName:'',
                 accountPassword:'',
-                ADD_SERVICE:'http://101.200.79.3:8765/org/api/merchant',
+                ADD_SERVICE:'http://172.16.38.191:8093/api/merchant',
                 isStoreName:true,
 
         }
@@ -141,10 +109,16 @@
               	   accountPassword:this.accountPassword,
                    orgForm:this.orgForm
               };
- 	 		this.$http.post(this.ADD_SERVICE,body,options).then((res)=>res.json()).then((res)=>{
+ 	 		this.$http.post(this.ADD_SERVICE,Api.formFormat(body),options).then((res)=>res.json()).then((res)=>{
  	 			  console.log(res);
  	 		});
  	 	},
+        changes:function(e){
+           this.isStoreName=true;
+        },
+        removeName:function(){
+            this.isStoreName=false;
+        }
  	 }
  }
 

@@ -3,10 +3,10 @@
 -->
 <template>
    <div class="btnCxt">
-   	
+
 			     <div class="btngroup">
-				    <md-button v-for="(row,index) in btnList"  
-				    class="md-raised md-primary btn-items" 
+				    <md-button v-for="(row,index) in btnList"  v-show="!isStoreAside"
+				    class="md-raised md-primary btn-items"
 				    :style="row.styles"
 				    @click.native="row.action"
 				    >{{row.title}}</md-button>
@@ -18,13 +18,13 @@
 
 
    </div>
-	
+
 </template>
 
 <script>
 	export default {
 		 name:"ButtonGroup",
-		 props:['btnList','btnLabel','labelIs'],
+		 props:['btnList','btnLabel','labelIs','isStoreAside'],
 		 data(){
 		 	 return {
 
@@ -46,14 +46,14 @@
    display: flex;
    align-items: flex-end;
 }
-		
+
 .btngroup,.btnlabel{
    width:6rem;
    height:0.55rem;
    overflow:hidden;
    display: flex;
    align-items: flex-end;
-  
+
 }
 .btnlabel{
 	 justify-content: flex-end;

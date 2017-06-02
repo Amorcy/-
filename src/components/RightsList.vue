@@ -4,15 +4,16 @@
 -->
 <template>
 	<div>
-		<Labels 
-	         :name="textName"
-             :hasSearch="true"
-             :title="title"
-	     ></Labels>
-	      <div class="tables">
-	        <router-view></router-view>
-         </div>
-
+		<ButtonGroup
+             :btnList="btnList"
+             :btnLabel="btnLabel"
+             :labelIs="labelIs"
+            ></ButtonGroup>
+            <Tables
+              :bodyName="bodyName"
+              :actionName="actionName"
+              :resultSet="resultSet"
+            ></Tables>
 	</div>
 </template>
 
@@ -22,12 +23,13 @@
 	import ButtonGroup from './ButtonGroup';
 	export default {
 		 name:'dashboard',
-		 components:{Labels},
+		 components:{Labels,Tables,ButtonGroup},
 		 data(){
+		 	var _this=this;
 		 	return {
-		 		textName:'分销商/商户权益',
+		 		textName:'分销商权益(商户权益)',
 		 		title:'权益编号/权益名称/状态',
-		 		bodyName:["权益编号","权益名称","权益内容","返佣占比","返佣方式","状态"],
+		 		bodyName:["权益编号","权益名称","权益内容","备注","状态"],
 		 		actionName:[
 		 		{"txt":"停用",actions:function(){
                       alert('停用');
@@ -36,10 +38,12 @@
                       alert('编辑');
 		 		}}
 		 		],
-		 		resultSet:6,
+		 		resultSet:5,
 		 		btnList:[
 		           {title:'添加权益',action:function(){
-		             alert('添加啊');
+		               _this.$router.push({
+		               	   name:'AddRights'
+		               });
 		           },styles:{width:'0.75rem',backgroundColor:'rgb(51, 135, 255)',color:'#ffffff'}}
 		        ],
 		        btnLabel:[{text:'今日新增',value:20},{text:'分销商总数',value:100}],
