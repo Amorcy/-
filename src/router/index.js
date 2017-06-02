@@ -32,6 +32,9 @@ import DishesList from '@/components/DishesList';
 
 import AddDishes from '@/components/AddDishes';
 
+import RightsList from '@/components/RightsList';
+
+import AddRights from '@/components/AddRights';
 Vue.use(Router)
 
 export default new Router({
@@ -84,7 +87,12 @@ export default new Router({
                   {path:'/setting/manageDishes/addDishes',name:'addDishes',component:AddDishes}
                ]
             },
-            {path:'/setting/rightRoles',name:'rightRoles',component:Rights},
+            {path:'/setting/rightRoles',name:'rightRoles',component:Rights,
+                 children:[
+                       {path:'/',name:'rightRoles',component:RightsList},
+                       {path:'/setting/rightRoles/AddRights',name:'AddRights',component:AddRights}
+                 ]
+             },
             {path:'/setting/agreementTemplates',name:'agreementTemplates',component:Agreement},
             {path:'/setting/discountUsers',name:'discountUsers',component:Seller},
             {path:'/setting/manageUsers',name:'manageUsers',component:Users},

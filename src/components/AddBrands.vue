@@ -1,5 +1,10 @@
 <!--
 添加门店组件
+"brandCode": "string",
+  "brandLogo": "string",
+  "brandName": "string",
+  "brandType": "string",
+  "businessModel": "string"
 -->
 <template>
   <div class="add-business">
@@ -7,13 +12,13 @@
       <form action="" class="form">
         <div class="store-list">
           <span class="store-left">品牌编号:</span><span class="store-right">
-            <input type="text" name="store-num" placeholder="输入门店编号">
+            <input type="text" name="store-num" placeholder="品牌编号" v-model="brandCode" >
           </span>
         </div>
         <div class="input-tip"></div>
         <div class="store-list">
           <span class="store-left">品牌名称:</span><span class="store-right">
-            <input type="text" name="store-name" placeholder="输入门店名称">
+            <input type="text" name="store-name" placeholder="输入门店名称"  v-model="brandName">
           </span>
         </div>
 
@@ -34,16 +39,16 @@
         <div class="input-tip"></div>
         <div class="store-list">
           <span class="store-left">品牌介绍:</span><span class="store-right">
-             <textarea>
-               
+             <textarea v-model="businessRemark">
+                 
              </textarea>
           </span>
         </div>
         <div class="input-tip"></div>
         <div class="store-list">
           <span class="store-left">&nbsp</span><span class="store-right vertify">
-              <button type="button">保存</button>
-              <button type="button">重置</button>
+             <md-button  @click.native="addBrands" class="md-raised md-primary sub-btn">提交</md-button>
+             <md-button class="md-raised md-dense sub-reset">重置</md-button>
           </span>
         </div>
       </form>
@@ -51,7 +56,7 @@
     <div class="add-brands">
          <div class="brands-cxt">
               <div class="b-ct">
-                
+                 
               </div>
               <div class="b-btns">
                   <div class="b-btns-btns">
@@ -68,7 +73,7 @@
 
          <div class="brands-cxt">
               <div class="b-ct">
-                
+                  
               </div>
               <div class="b-btns">
                   <div class="b-btns-btns">
@@ -104,12 +109,72 @@
 <script>
   import Tables from './Tables';
   import Paginate from './Paginate';
+  import Api from '../api/api';
   export default {
     name: 'addBrands',
     components:{Paginate},
     data(){
       return {
+        brandCode:'',
+        brandName:'',
+        brandLogo: "",
+        brandType: 1,
+        businessModel: 0,
+        businessRemark:'',
+        resultSet:[]
+
       }
+    },
+    methods:{
+      addBrands:function(){
+        console.log(this);
+        console.log(Api.formFormat(this.$data));
+        var options={headers:{ 
+                                   'Content-Type':'application/json',
+                                   'Authorization':Api.getToken()
+                                 }};
+        var SERVICE='http://101.200.79.3:8765/brand/api/brands';
+        var data={};
+        data.brandCode=this.brandCode;
+        data.brandName=this.brandName;
+        data.brandLogo=this.brandLogo;
+        data.businessRemark=this.businessRemark;
+
+        this.$http.post(SERVICE,data,options).then((res)=>res.json()).then((response)=>{
+             if(response){
+                alert('添加成功');
+                this.updateList();
+             }else{
+                alert('添加失败');
+             }
+        });
+      },
+      updateList:function(){
+            var options={headers:{ 
+                                   'Content-Type':'application/json',
+                                   'Authorization':Api.getToken()
+                                 }};
+
+                              var GET_SERVICE='http://101.200.79.3:8765/brand/api/brands?page=1&size=3';
+                              this.$http.get(GET_SERVICE,options).then((res)=>res.json()).then((response)=>{
+                                   if(response){
+                                      this.resultSet=response.content;
+                                   };
+                              });
+      }
+    },
+    mounted:function(){
+                              var options={headers:{ 
+                                   'Content-Type':'application/json',
+                                   'Authorization':Api.getToken()
+                                 }};
+                              var GET_SERVICE='http://101.200.79.3:8765/brand/api/brands?page=1&size=3';
+                              this.$http.get(GET_SERVICE,options).then((res)=>res.json()).then((response)=>{
+                                   if(response){
+                                      this.resultSet=response.content;
+                                   };
+                              });
+
     }
   }
 

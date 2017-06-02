@@ -1,54 +1,60 @@
 <!--
-添加菜品组件
+添加权益
 -->
 <template>
 	<div class="add-business">
 		<div class="add-cxt">
-			<div class="add-brands-menu">
-      <form action="" class="form">
-        <div class="store-list">
-          <span class="store-left">品牌编号:</span><span class="store-right">
-            <input type="text" name="store-num" placeholder="输入门店编号">
-          </span>
+      <div class="add-cxt-form">
+          
+        <div class="cxt-form-items">
+            <span class="form-items-starts" :style='{color:"#ffffff"}'>*</span>
+          <label class="form-label">权益编号</label>
+                    <input v-model="orgName" class="form-input" type="text"/>
         </div>
-        <div class="input-tip"></div>
-        <div class="store-list">
-          <span class="store-left">品牌名称:</span><span class="store-right">
-            <input type="text" name="store-name" placeholder="输入门店名称">
-          </span>
+        <div class="cxt-form-items" v-if="isStoreName">
+            <span class="form-items-starts">*</span>
+          <label class="form-label">权益编号</label>
+                    <input   class="form-input" type="text"/>
         </div>
-        <div class="input-tip"></div>
-        <div class="store-list">
-          <span class="store-left">菜品缩写:</span><span class="store-right">
-            <input type="text" name="store-name" placeholder="输入门店名称">
-          </span>
+
+
+
+        <div class="cxt-form-items">
+            <span class="form-items-starts">*</span>
+          <label class="form-label">权益类型</label>
+                    <div class="form-address">
+                        <input class="address-txt"></input>
+                        <i class="iconfont icon-tubiao10"></i>
+                    </div>
         </div>
-        <div class="input-tip"></div>
-        <div class="store-list store-pic">
-          <span class="store-left">菜品图片:</span><span class="store-right">
-            <span class="upload-pic">
-              <p>+</p>
-              <p>上传照片</p>
-            </span>
-            <span class="upload-explain">
-              <p>图片需1M以内</p>
-              <p>最佳尺寸: 300*400px</p>
-              <p>最多可添加5张</p>
-            </span>
-          </span>
+        <div class="cxt-form-items">
+            <span class="form-items-starts">*</span>
+          <label class="form-label">权益内容</label>
+                    到店消费<input class="form-input" type="text" :style="{width:'0.5rem'}"/>元
         </div>
-        
-        <div class="input-tip"></div>
-        <div class="store-list">
-          <span class="store-left">&nbsp</span><span class="store-right vertify">
-             <md-button  @click.native="addBusiness" class="md-raised md-primary sub-btn">保存</md-button>
+        <div class="cxt-form-items">
+             <span class="form-items-starts" :style="{color:'#ffffff'}">*</span>
+          <label class="form-label"></label>
+                    <div  :style='{marginRight:"0.08rem"}'>积<input class="form-input" placeholder="" type="text" :style="{width:'0.5rem'}"/>分</div>
+        </div>
+
+
+       
+        <div class="cxt-form-items">
+            <span class="form-items-starts" :style='{color:"#ffffff"}'>*</span>
+          <label class="form-label">备注</label>
+                    <textarea></textarea>
+        </div>
+        <div class="form-items-sub">
+             <div class="items-pad"></div>
+           <div class="items-sub">
+            <md-button  @click.native="addBusiness" class="md-raised md-primary sub-btn">提交</md-button>
             <md-button class="md-raised md-dense sub-reset">重置</md-button>
-          </span>
+           </div>
         </div>
-      </form>
+
+      </div>
     </div>
-		
-		</div>
 		<div class="add-tables">
 			<div class="add-tables-cxt">
 				<Tables
@@ -71,7 +77,7 @@
  	 data(){
         var _this=this;
         return {
-        	   bodyName:["菜品编号","菜品名称","菜品缩写","图片"],
+        	   bodyName:["权益编号","权益名称","权益内容","备注","状态"],
         actionName:[
         {"txt":"审核",actions:function(){
                       alert('审核');
@@ -80,7 +86,7 @@
                       alert('停用');
         }}
         ],
-		 		resultSet:4,
+		 		resultSet:5,
 		 		isCheckBox:false,
 		 		orgForm:false,
                 //orgForm类型  1连锁 2 单店
@@ -163,13 +169,19 @@
     	text-align: left;
     	font-size: 0.14rem;
     }
-    .form-input{
+    .form-input,textarea{
         width:1.6rem;
         height: 0.28rem;
         border:1px solid #dddddd;
         border-radius:4px;
 
     }
+    textarea{
+        width:1.6rem;
+        height: 0.38rem;
+        border:1px solid #dddddd;
+        border-radius:4px;
+      }
     .form-items-starts{
     	width:0.14rem;
     	height: 0.14rem;
