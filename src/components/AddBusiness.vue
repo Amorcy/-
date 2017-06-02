@@ -34,9 +34,9 @@
 					<label class="form-label">门店名称</label>
                     <input   class="form-input" type="text"/>
 				</div>
-				
-				
-				
+
+
+
 				<div class="cxt-form-items">
 				    <span class="form-items-starts" :style="{color:'#ffffff'}">*</span>
 					<label class="form-label">地址</label>
@@ -135,7 +135,7 @@
  	 methods:{
  	 	addBusiness:function(){
  	 		 var options={
-                 headers:{ 
+                 headers:{
                                    'Content-Type':'application/x-www-form-urlencoded',
                                    'Authorization':Api.getToken()
                                  }
@@ -146,7 +146,7 @@
               	   accountName:this.accountName,
               	   accountPassword:this.accountPassword,
                    orgForm:this.orgForm
-              };  
+              };
  	 		this.$http.post(this.ADD_SERVICE,Api.formFormat(body),options).then((res)=>res.json()).then((res)=>{
  	 			  console.log(res);
  	 		});
@@ -206,7 +206,7 @@
         height: 0.28rem;
         border:1px solid #dddddd;
         border-radius:4px;
-        
+
     }
     .form-items-starts{
     	width:0.14rem;
@@ -229,7 +229,7 @@
     	width:1.6rem;
     	height:0.54rem;
     	display: flex;justify-content: space-between;
-    	
+
     }
     .sub-btn,.sub-reset{
     	width:0.7rem;
