@@ -41,8 +41,8 @@
         <div class="input-tip"></div>
         <div class="store-list">
           <span class="store-left">&nbsp</span><span class="store-right vertify">
-              <button>保存</button>
-              <button>重置</button>
+              <button type="button">保存</button>
+              <button type="button">重置</button>
           </span>
         </div>
       </form>
