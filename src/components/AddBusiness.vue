@@ -8,15 +8,28 @@
 			    <div class="cxt-form-items">
 			        <span class="form-items-starts">*</span>
 					<label class="form-label">商户类型</label>
-                    单店:<md-radio v-model="orgForm" id="my-test4" name="my-test-group2" md-value="2" class="md-primary"></md-radio>
-                    连锁:<md-radio v-model="orgForm" id="my-test5" name="my-test-group2" md-value="1" class="md-primary"></md-radio>
+                    单店:<md-radio 
+                    v-model="orgForm" 
+                    id="single" 
+                    name="my-test-group2" 
+                    md-value="2" 
+                    @click.native="changes"
+                    class="md-primary"></md-radio>
+
+                    连锁:<md-radio
+                     v-model="orgForm"
+                     @click.native="removeName" 
+                     id="multiple" 
+                     name="my-test-group3" 
+                     md-value="1" 
+                     class="md-primary"></md-radio>
 				</div>
 				<div class="cxt-form-items">
 				    <span class="form-items-starts">*</span>
 					<label class="form-label">商户名称</label>
                     <input v-model="orgName" class="form-input" type="text"/>
 				</div>
-				<div class="cxt-form-items">
+				<div class="cxt-form-items" v-if="isStoreName">
 				    <span class="form-items-starts">*</span>
 					<label class="form-label">门店名称</label>
                     <input   class="form-input" type="text"/>
@@ -107,14 +120,16 @@
 		 		],
 		 		resultSet:7,
 		 		isCheckBox:false,
-		 		orgForm:true,
+		 		orgForm:false,
                 //orgForm类型  1连锁 2 单店
                 //orgName商户名称
                 //
                 orgName:'',
                 accountName:'',
                 accountPassword:'',
-                ADD_SERVICE:'http://172.16.38.191:8093/api/merchant'
+                ADD_SERVICE:'http://172.16.38.191:8093/api/merchant',
+                isStoreName:true,
+
         }
  	 },
  	 methods:{
@@ -135,7 +150,13 @@
  	 		this.$http.post(this.ADD_SERVICE,Api.formFormat(body),options).then((res)=>res.json()).then((res)=>{
  	 			  console.log(res);
  	 		});
- 	 	}
+ 	 	},
+        changes:function(e){
+           this.isStoreName=true;
+        },
+        removeName:function(){
+            this.isStoreName=false;
+        }
  	 }
  }
 
