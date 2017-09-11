@@ -110,4 +110,36 @@
                        break;
 //https://www.npmjs.com/package/smooth-scrollbar
 
+var s= [1,22,8,10,87];
+
+
+var keys=[
+{name:'1',value:1},
+{name:'1',value:2},
+{name:'2',value:7777}];
+
+var result=[
+  {name:'1',value:[1,2]},
+  {name:'2',value:[777]}
+]
+
+
+ <PrintBase></PrintBase>
+            <PrintTitle></PrintTitle>
+            <PrintLogo></PrintLogo>
+            <PrintStoreInfo></PrintStoreInfo>
+            <PrintShowInfo></PrintShowInfo>
+            <PrintShowTotal></PrintShowTotal>
+            <PrintFooter></PrintFooter>
+            <PrintBarCode></PrintBarCode>
+
+
+
+
+
+
+
+
+
+
 
