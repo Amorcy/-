@@ -10,7 +10,7 @@
     import PrintShowTotal from './PrintShowTotal';
     import PrintFooter from './PrintFooter';
     import PrintBarCode from './PrintBarCode';
-    
+
     import draggable from 'vuedraggable';
     //import template components
 
@@ -18,23 +18,23 @@
     import BoxTemplate from '../template/BoxTemplate';
 
 	export default {
-		render:function(h){
+	 	render:function(h){
 		  var ele=this.components;
 		  var types=this.type;
 		  var values=this.values;
           return <div>
                      <div class="container">
-                       
+
                        <draggable v-model="ele">
-			              	
+
 	                        {
 	                          this.renderComponents(h)
 	                        }
-                           
+
 			             </draggable>
-                         <BoxTemplate 
+                         <BoxTemplate
                          type={{types}}
-                        
+
                          ></BoxTemplate>
 			         </div>
 				</div>
@@ -52,7 +52,7 @@
 			PrintBase
 		},
 		data(){
-			
+
 			return {
               components:[
                      {id:'base',name:'基本组件',
@@ -84,13 +84,16 @@
 		},
 		methods:{
 			clickBox:function(data,index,clickFlag){
-                   var _index=index.i;
+             let _index=index.i;
+             const self = this
 			       if(clickFlag){
 			       	  this.components[_index].edit=false;
 			       }else{
+               this.components.forEach(function (i,index) {
+                 self.components[index].edit=false;
+               })
 			       	   this.components[_index].edit=true;
 			       }
-
             },
             mountComponentByType:function(type,items){
                   this.type=type;
@@ -111,29 +114,28 @@
                 }
             },
 			renderComponents:function(h){
-				    
+
 				    var _callback=this.clickBox;
 				    var _openBox=this.openBox;
-				   
+
 					return (<transition-group>
-					{this.components.map((items,i)=>
-						   { 
-                            var _edit=items.edit;
-                
-						   	return <items.componentName 
-						   						    key={{i}} 
-						   						    callback={{_callback}}
-						   						    openbox={{_openBox}}
-						   						    index={{i}}
-						   						    name={{items}}
-						   						    edit={{_edit}}
-						   						    ></items.componentName>}
-						)}
-					 </transition-group>)	
+                    {this.components.map((items,i)=>
+                       {
+                          var _edit=items.edit;
+                          return <items.componentName
+                                    key={i}
+                                    callback={{_callback}}
+                                    openbox={{_openBox}}
+                                    index={{i}}
+                                    name={{items}}
+                                    edit={{_edit}}
+                                  ></items.componentName>}
+                    )}
+					        </transition-group>)
 		    }
-		    
+
 		}
-		
+
 	}
 </script>
 

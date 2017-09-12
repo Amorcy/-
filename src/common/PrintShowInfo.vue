@@ -21,15 +21,15 @@
                     </div>
                     <div v-else></div>
         	  </div>
-               
+
 </template>
 <style scoped>
 	 .container-show-item{
     	width:100%;
-    	
+
         position: relative;
         padding:20px 0px 20px 0px;
-        
+
     }
     .container-show-item{
     	width:100%;
@@ -90,86 +90,97 @@
     import {shareCellAction} from '../constant/actions';
 	export default {
 		 name:'PrintShowInfo',
-         props:['index','name','callback','edit','openbox'],
-         data(){
-             return {
-                  stores:{
-                  type:'CELL',
-                  index:'',
-                  shows:[
-                       {id:0,name:"门店名称",checked:true,value:'门店名称',
-                       fontStyle:{
-                                             fontFamily:'',
-                                             fontWeight:false,
-                                             textAlign:'',
-                        }},
-                    
-                        {id:1,name:"商品代码",checked:true,value:"商品代码",
-                                          fontStyle:{
-                                             fontFamily:'',
-                                             fontWeight:false,
-                                             textAlign:'',
-                        }},
-                        {id:2,name:"单价",checked:true,value:"单价",
-                                          fontStyle:{
-                                             fontFamily:'',
-                                             fontWeight:false,
-                                             textAlign:'',
-                        }}
-                  ],
-                  options:[
-                      {id:0,name:"商品代码",checked:true,value:'商品代码',
-                      fontStyle:{
-                         fontFamily:'',
-                         fontWeight:false,
-                         textAlign:'',
+     props:['index','name','callback','edit','openbox'],
+     data(){
+         return {
+              stores:{
+                type:'CELL',
+                index:'',
+                shows:[
+                     {id:0,name:"门店名称",checked:true,value:'门店名称',
+                     fontStyle:{
+                                           fontFamily:'',
+                                           fontWeight:false,
+                                           textAlign:'',
                       }},
 
-                      {id:1,name:"商品名称",checked:true,value:"商品名称",
-                      fontStyle:{
-                         fontFamily:'',
-                         fontWeight:false,
-                         textAlign:'',
+                      {id:1,name:"商品代码",checked:true,value:"商品代码",
+                                        fontStyle:{
+                                           fontFamily:'',
+                                           fontWeight:false,
+                                           textAlign:'',
                       }},
                       {id:2,name:"单价",checked:true,value:"单价",
-                      fontStyle:{
-                         fontFamily:'',
-                         fontWeight:false,
-                         textAlign:'',
-                      }},
-                      {id:3,name:"数量",checked:true,value:"数量",
-                      fontStyle:{
-                         fontFamily:'',
-                         fontWeight:false,
-                         textAlign:'',
-                      }},
-                      {id:4,name:"优惠",checked:true,value:"优惠",
-                      fontStyle:{
-                         fontFamily:'',
-                         fontWeight:false,
-                         textAlign:'',
-                      }},
-                      {id:5,name:"金额",checked:true,value:"金额",
-                      fontStyle:{
-                         fontFamily:'',
-                         fontWeight:false,
-                         textAlign:'',
-                      }},
-                      ]
-                    }
-             }
-         },
-         methods:{
-            handleClick:function($event){
-                this.openbox._openBox($event,this.name.items,this.index,'EDIT');
-                this.stores.index=this.index.i;
-               
-                store.dispatch(shareCellAction(this.stores));
+                                        fontStyle:{
+                                           fontFamily:'',
+                                           fontWeight:false,
+                                           textAlign:'',
+                      }}
+                ],
+                options:[
+                    {id:0,name:"商品代码",checked:true,value:'商品代码',
+                    fontStyle:{
+                       fontFamily:'',
+                       fontWeight:false,
+                       textAlign:'',
+                    }},
 
-                console.log(this.stores);
-
-            }
+                    {id:1,name:"商品名称",checked:true,value:"商品名称",
+                    fontStyle:{
+                       fontFamily:'',
+                       fontWeight:false,
+                       textAlign:'',
+                    }},
+                    {id:2,name:"单价",checked:true,value:"单价",
+                    fontStyle:{
+                       fontFamily:'',
+                       fontWeight:false,
+                       textAlign:'',
+                    }},
+                    {id:3,name:"数量",checked:true,value:"数量",
+                    fontStyle:{
+                       fontFamily:'',
+                       fontWeight:false,
+                       textAlign:'',
+                    }},
+                    {id:4,name:"优惠",checked:true,value:"优惠",
+                    fontStyle:{
+                       fontFamily:'',
+                       fontWeight:false,
+                       textAlign:'',
+                    }},
+                    {id:5,name:"金额",checked:true,value:"金额",
+                    fontStyle:{
+                       fontFamily:'',
+                       fontWeight:false,
+                       textAlign:'',
+                    }},
+                    ]
+              }
          }
+     },
+     methods:{
+        handleClick:function($event){
+            this.openbox._openBox($event,this.name.items,this.index,'EDIT');
+            this.stores.index=this.index.i;
+
+            store.dispatch(shareCellAction(this.stores));
+
+            console.log(this.stores);
+
+        }
+     },
+    mounted(){
+      store.subscribe(()=>{
+        console.log(this.index.i)
+        console.log(store.getState().infos.index)
+        if(this.index.i == store.getState().infos.index){
+          this.stores.shows = store.getState().infos.shows
+        }
+      })
+    }
+
+
 
 	}
 </script>

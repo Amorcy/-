@@ -6,7 +6,7 @@
  		 <div class="print-box">
  		 	<h4 class="print-header">票头</h4>
             <div class="print-items">
-            	<div  @click="addTemplate(items.id,index,items)" v-for="(items,index) in stores.options" 
+            	<div  @click="addTemplate(items.id,index,items)" v-for="(items,index) in stores.options"
             	:class="{'print-items-its':items.checked,'print-items-its-check':!items.checked}">{{items.name}}</div>
             </div>
             <div class="print-editor">
@@ -19,16 +19,16 @@
             </div>
             <div class="print-checked">
             	<div class="print-checked-box" v-if="operate.edit">
-                
+
                     <draggable v-model="templates">
                        <transition-group class="print-check-box-edits">
                         		<div  :key="its.id"  v-for="its in templates" class="print-checked-box-items">
                         			<div class="text-name">{{its.name}}</div>
                                     <div class="text-name">{{its.value}}</div>
                         		</div>
-                       </transition-group> 
-                    </draggable>    
-                    
+                       </transition-group>
+                    </draggable>
+
             	</div>
                 <div class="print-checked-box" v-else>
                          <div class="print-template-header-name">
@@ -51,7 +51,7 @@
                            <div v-for="(its,editIndex) in templates" class="print-checked-box-items-edit" >
                              <input
                                  @mouseup="changeSelectIndex(its.value,editIndex)"
-                                 v-model="its.value" :value="its.value" 
+                                 v-model="its.value" :value="its.value"
                                   class="print-checked-box-items-input"
                                  :class="{
                                  'input-edit-fontWeight':its.fontStyle.fontWeight
@@ -61,8 +61,8 @@
                                     textAlign:its.fontStyle.textAlign
                                     }"
                                  />
-                        </div>  
-                        </div>     
+                        </div>
+                        </div>
                 </div>
             </div>
              <div v-if="fontFamilyBox" class="font-box">
@@ -74,13 +74,13 @@
             </div>
             <div v-else></div>
  		 </div>
-         <div class="commit-data">提交</div>
+         <div class="commit-data" @click="submitMsg">提交</div>
  	</div>
  </template>
 
  <script>
     import store from '../constant/store';
-    //import {shareHYAction} from '../constant/actions';
+    import {shareCellAction} from '../constant/actions';
     import draggable from 'vuedraggable';
  	export default {
  		 name:'CellTemplate',
@@ -121,15 +121,25 @@
          	 }
          },
          methods:{
+           // todo 向后台提交数据
+           submitMsg(){
+             this.stores.shows=this.templates;
+             console.log('send data');
+             console.log(this.stores);
+             store.dispatch(shareCellAction(this.stores));
+
+             this.stores = {}
+             this.templates = []
+           },
             //将选项添加到列表中
          	addTemplate:function(id,index,items){
-                
+
                 if(this.stores.options[index].checked){
                     this.stores.options[index].checked=false;
                 }else{
                     this.stores.options[index].checked=true;
                 }
-         		
+
                 this.middleTemplates.push(this.stores.options[index]);
                 var _mtp=this.middleTemplates;
                 var lgh=_mtp.length;
@@ -142,10 +152,10 @@
                     }
                 }
                 this.templates=newArray;
-                this.stores.shows=this.templates;
-                console.log('send data');
-                console.log(this.stores);
-                //store.dispatch(shareHYAction(this.stores));
+//                this.stores.shows=this.templates;
+//                console.log('send data');
+//                console.log(this.stores);
+//                store.dispatch(shareCellAction(this.stores));
          	},
             //开启改变子项位置
             openChangedSwitch:function(){
@@ -210,7 +220,7 @@
                     this.templates[_index].value=_text.toLowerCase();
                     this.fontUpper=false;
                  }
-                 
+
             },
             //改变字体对齐方式
             changeFontAlign:function(){
@@ -237,13 +247,13 @@
                 if(this.fontAlign>=3){
                    this.fontAlign=0;
                 }
-               
+
             }
          },
          mounted:function(){
-            this.stores=store.getState().infos; 
+            this.stores=store.getState().infos;
             store.subscribe(()=>{
-                this.stores=store.getState().infos; 
+                this.stores=store.getState().infos;
                 console.log(this.stores);
             });
          }
@@ -404,7 +414,7 @@
         border-radius: 4px;
         text-align: center;
         line-height: 20px;
-       
+
      }
      .close-font{
         display: inline-block;
