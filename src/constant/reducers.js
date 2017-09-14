@@ -41,75 +41,31 @@ const reducers = (state = rootTree, action) => {
   switch (TYPE) {
         case "SHARE_TXT_ACTION":
             state.txt= action.data;
-            state.sendData.forEach(function (i, index) {
-              if(state.sendData[index].id == state.txt.id){
-                state.sendData[index] = state.txt
-              }else {
-                state.sendData[length] = state.txt
-              }
-            })
+            rootTree.sendData.unshift(state.txt)
             break;
         case "SHARE_HY_ACTION":
             state.stores=action.data;
-
-            rootTree.sendData.push(state.stores)
-            console.log(rootTree.sendData)
-            rootTree.sendData.forEach(function (i, index) {
-              console.log(rootTree.sendData[index].id)
-              console.log(state.stores.id);
-              if(rootTree.sendData[index].id == state.stores.id){
-                console.log('come')
-                  rootTree.sendData.splice(index,1,state.stores)
-              }
-            })
-
-            console.log(rootTree.sendData)
-          break;
+            rootTree.sendData.unshift(state.stores)
+            break;
         case "SHARE_FT_ACTION":
             state.footers=action.data;
-            if(state.sendData.length){
-              state.sendData.forEach(function (i, index) {
-                if(state.sendData[index].id == state.footers.id){
-                  state.sendData[index] = state.footers
-                }else {
-                  state.sendData[length] = state.footers
-                }
-              })
-            }else{
-              state.sendData.push(state.footers)
-            }
-
-          break;
+            rootTree.sendData.unshift(state.footers)
+            break;
         case "SHARE_CELL_ACTION":
             state.infos=action.data;
-            if(state.sendData.length){
-              state.sendData.forEach(function (i, index) {
-                if(state.sendData[index].id == state.infos.id){
-                  state.sendData[index] = state.infos
-                }else {
-                  state.sendData[length] = state.infos
-                }
-              })
-            }else {
-              state.sendData.push(state.infos)
-            }
-
-          break;
+            rootTree.sendData.unshift(state.infos)
+            break;
       case "SHARE_IMG_ACTION":
-        state.img=action.data;
-        if (state.sendData.length){
-          state.sendData.forEach(function (i, index) {
-            if(state.sendData[index].id == state.img.id){
-              state.sendData[index] = state.img
-            }else {
-              state.sendData[ length] = state.img
-            }
-          })
-        }else {
-          state.sendData.push(state.img)
-        }
-        break;
+            state.img=action.data;
+            rootTree.sendData.unshift(state.img)
+            break;
     }
+    var hash = {}
+    rootTree.sendData = rootTree.sendData.reduce(function (item,next) {
+      hash[next.id]?'':hash[next.id]=true&&item.unshift(next)
+      return item
+    },[])
+    console.log(rootTree.sendData)
     return state;
 };
 
