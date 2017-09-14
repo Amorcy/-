@@ -5,9 +5,9 @@
 	<div class="container-show-barcode"
           @click="callback._callback(name.items,index,edit._edit)"
           :class="{'title-select':edit._edit}">
-        	  	    <img src="../assets/barcode.jpg" class="container-show-img">
+        	  	    <img :src="img.imgSrc || require('../assets/barcode.jpg')" class="container-show-img">
                     <div class="edit-box" v-if="edit._edit==true">
-                        <span @click.stop="openbox._openBox($event,name.items,index,'EDIT')">编辑</span>
+                        <span @click.stop="handleClick($event)">编辑</span>
                     <span @click.stop="openbox._openBox($event,name.items,index,'ADD')">加内容</span>
                     <span @click.stop="openbox._openBox($event,name.items,index,'REMOTE')">删除</span>
                     </div>
@@ -50,8 +50,45 @@
     }
 </style>
 <script >
+  import store from '../constant/store';
+  import {shareImgAction} from '../constant/actions';
+
 	export default {
 		 name:"PrintBarCode",
-          props:['index','name','callback','edit','openbox'],
+     props:['index','name','callback','edit','openbox'],
+     data(){
+		   return{
+         img:{
+           id:2,
+           areaCode:'EWM',
+           areaName:'二维码',
+           areaSeq:2,
+           editTpe:2,
+           picDirection:1,
+           type:'IMG',
+           index:'',
+           imgSrc:''
+         }
+       }
+     },
+    methods:{
+       handleClick($event){
+         this.openbox._openBox($event,this.name.items,this.index,'EDIT')
+         this.img.index = this.index.i
+         store.dispatch(shareImgAction(this.img))
+       },
+      updateViews:function(){
+        if(this.index.i==store.getState().img.index){
+          this.img=store.getState().img;
+        }
+      }
+    },
+    mounted(){
+      this.updateViews();
+      store.subscribe(()=>{
+        this.updateViews();
+      });
+    }
+
 	}
 </script>

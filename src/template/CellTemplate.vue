@@ -89,6 +89,12 @@
          	 return {
          	 	 msg:'xxxx',
          	 	 stores:{
+                   id:'',
+                   areaCode:'',
+                   areaName:'',
+                   areaSeq:1,
+                   picDirection:1,
+                   editType:1,
                     type:'CELL',
                     index:'',
                     options:[]

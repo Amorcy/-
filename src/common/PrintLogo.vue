@@ -6,9 +6,9 @@ logo设置
 	      @click="callback._callback(name.items,index,edit._edit)"
 	      :class="{'title-select':edit._edit}"
 	 >
-        	  	 <img src="../assets/kfc.png" class="container-logo-img"/>
+        	  	 <img :src="img.imgSrc || require('../assets/kfc.png')" class="container-logo-img"/>
 	        	  	 <div class="edit-box" v-if="edit._edit==true">
-	        	  		<span @click.stop="openbox._openBox($event,name.items,index,'EDIT')">编辑</span>
+	        	  		<span @click.stop="handleClick($event)">编辑</span>
         	  		<span @click.stop="openbox._openBox($event,name.items,index,'ADD')">加内容</span>
         	  		<span @click.stop="openbox._openBox($event,name.items,index,'REMOTE')">删除</span>
 	        	  	</div>
@@ -52,8 +52,45 @@ logo设置
 </style>
 
 <script>
-	export default {
+  import store from '../constant/store';
+  import {shareImgAction} from '../constant/actions';
+
+  export default {
 		 name:'PrintLogo',
 		 props:['index','name','callback','edit','openbox'],
+     data(){
+		   return {
+         img:{
+           id:4,
+           areaCode:'LG',
+           areaName:'LOGO',
+           areaSeq:3,
+           picDirection:1,
+           editType:2,
+           type:'IMG',
+           index:'',
+           imgSrc:''
+         }
+       }
+     },
+    methods:{
+      handleClick($event){
+        this.openbox._openBox($event,this.name.items,this.index,'EDIT');
+        this.img.index=this.index.i;
+        store.dispatch(shareImgAction(this.img))
+
+      },
+      updateViews:function(){
+        if(this.index.i==store.getState().img.index){
+          this.img=store.getState().img;
+        }
+      }
+    },
+    mounted(){
+      this.updateViews();
+      store.subscribe(()=>{
+        this.updateViews();
+      });
+    }
 	}
 </script>

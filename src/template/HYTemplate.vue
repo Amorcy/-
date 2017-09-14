@@ -6,7 +6,7 @@
  		 <div class="print-box">
  		 	<h4 class="print-header">票头</h4>
             <div class="print-items">
-            	<div  @click="addTemplate(items.id,index,items)" v-for="(items,index) in stores.options"
+            	<div v-for="(items,index) in stores.options" @click="addTemplate(items.id,index,items)"
             	:class="{'print-items-its':items.checked,'print-items-its-check':!items.checked}">{{items.name}}</div>
             </div>
             <div class="print-editor">
@@ -59,8 +59,10 @@
  </template>
 
  <script>
+    import Api from '../api/api'
     import store from '../constant/store';
     import {shareHYAction} from '../constant/actions';
+    import {shareFooterAction} from '../constant/actions';
     import draggable from 'vuedraggable';
  	export default {
  		 name:'HYTemplate',
@@ -69,6 +71,12 @@
          	 return {
          	 	 msg:'xxxx',
          	 	 stores:{
+                     id:'',
+                     areaCode:'',
+                     areaName:'',
+                     areaSeq:1,
+                     picDirection:1,
+                     editType:1,
                     type:'HY',
                     index:'',
                     options:[]
@@ -104,23 +112,53 @@
            // 提交
            submitMsg(){
              this.stores.shows=this.templates;
-             console.log('send data');
-             console.log(this.stores);
-             store.dispatch(shareHYAction(this.stores));
+//             let data = {
+//               area:[
+//                 {
+//                   areaCode:this.stores.areaCode,
+//                   areaName:this.stores.areaName,
+//                   areaSeq:this.stores.areaSeq,
+//                   editType:this.stores.editType,
+//                   tmplId:'189076587302771240',
+//                   picDirection:this.stores.picDirection,
+//                   areaContent:JSON.stringify(this.templates)
+//                 }
+//               ]
+//             }
+//             var _options = {
+//               headers: {
+////                 'Content-Type': 'application/json',
+//                 'Authorization': Api.getToken()
+//               }
+//             }
+//             this.$http.put('http://101.200.79.3:8765/settings/api/print/tmpl/update/189076587302771240',data,_options)
+//               .then((res)=>{
+//                 console.log(res)
+//               })
+             this.stores.options.forEach(function (i, index) {
+               i.checked=true
+             })
 
+             store.dispatch(shareHYAction(this.stores));
              this.stores = {}
              this.templates = []
+             this.middleTemplates = []
            },
             //将选项添加到列表中
            addTemplate:function(id,index,items){
-
                 if(this.stores.options[index].checked){
                     this.stores.options[index].checked=false;
+                    this.middleTemplates.push(this.stores.options[index]);
+
                 }else{
                     this.stores.options[index].checked=true;
-                }
+                    for(var i=0,len=this.middleTemplates.length;i<len;i++){
+                      if (this.middleTemplates[i] == this.stores.options[index]){
+                        this.middleTemplates.splice(i,1);
+                      }
+                    }
 
-                this.middleTemplates.push(this.stores.options[index]);
+                }
                 var _mtp=this.middleTemplates;
                 var lgh=_mtp.length;
                 var hash={};
@@ -132,10 +170,6 @@
                     }
                 }
                 this.templates=newArray;
-//                this.stores.shows=this.templates;
-//                console.log('send data');
-//                console.log(this.stores);
-//                store.dispatch(shareHYAction(this.stores));
          	 },
             //开启改变子项位置
             openChangedSwitch:function(){
@@ -166,11 +200,9 @@
                  _news.index=editIndex;
                  _news.value=value;
                  this.selectInput=_news;
-                 console.log(_news);
             },
             //打开设置字体窗口
             openFontFamily:function(){
-                console.log(this.fontFamilyBox);
                 if(this.fontFamilyBox){
                     this.fontFamilyBox=false;
                 }else{
@@ -192,7 +224,6 @@
                  }
                  var _index=this.selectInput.index;
                  var _text=this.selectInput.value;
-                 console.log(_text);
                  if(this.fontUpper==false){
                     this.templates[_index].value=_text.toUpperCase();
                     this.fontUpper=true;
@@ -232,12 +263,10 @@
          },
          mounted:function(){
             this.stores=store.getState().stores;
-            console.log(this.stores.index);
+//            this.templates = this.stores.shows
             store.subscribe(()=>{
-
-                this.stores=store.getState().stores;
-                console.log('this.stores.index');
-                console.log(this.stores.index);
+              this.stores=store.getState().stores;
+//              this.templates = this.stores.shows
             });
          }
  	}

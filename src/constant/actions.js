@@ -25,3 +25,10 @@ export const shareCellAction=(data)=>{
 	 	 data:data
 	 }
 }
+
+export const shareImgAction=(data)=>{
+  return {
+    type:'SHARE_IMG_ACTION',
+    data:data
+  }
+}

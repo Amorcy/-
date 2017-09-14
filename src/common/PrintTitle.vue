@@ -2,22 +2,22 @@
 标题设置
 -->
 <template>
-	 <div 
+	 <div
 	 @click="callback._callback(name.items,index,edit._edit)"
 	 class="container-topic"
 	 :class="{'title-select':edit._edit}">
-        	  	<h4 
+        	  	<h4
         	  	class="container-topic-title"
-        	  	:class="{'input-font-weight':txt.textWeight}"
-        	  	:style="{'textAlign':txt.textAlign,'fontFamily':txt.textFamily}"
-        	  	>{{txt.textValue}}</h4>
+        	  	:class="{'input-font-weight':txt.text.textWeight}"
+        	  	:style="{'textAlign':txt.text.textAlign,'fontFamily':txt.text.textFamily}"
+        	  	>{{txt.text.textValue}}</h4>
         	  	<div class="edit-box" v-if="edit._edit==true">
         	  		<span @click.stop="handleClick($event)">编辑</span>
         	  		<span @click.stop="openbox._openBox($event,name.items,index,'ADD')">加内容</span>
         	  		<span @click.stop="openbox._openBox($event,name.items,index,'REMOTE')">删除</span>
         	  	</div>
         	  	<div v-else></div>
-        	  	
+
      </div>
 </template>
 
@@ -28,7 +28,7 @@
 		user-select: none;
 		font-size: 20px;
 		font-weight:100;
-		
+
 	}
 	.container-topic{
 		width:100%;
@@ -70,13 +70,22 @@
 		 data(){
 		 	return {
 		 		txt:{
+          id:1,
+          areaCode:'BT',
+          areaName:'标题',
+          areaSeq:1,
+          picDirection:1,
+          editType:3,
 		 			type:'TXT',
 		 			index:'',
-					textValue:'物美店庆大酬宾欢迎您！',
-					textUpper:false,
-					textFamily:'',
-					textAlign:'center',
-					textWeight:false
+          text:{
+            textValue:'物美店庆大酬宾欢迎您！',
+            textUpper:false,
+            textFamily:'',
+            textAlign:'center',
+            textWeight:false
+          }
+
 				}
 		 	}
 		 },
@@ -86,16 +95,22 @@
 		 		//console.log(this.index.i);
 		 		this.openbox._openBox($event,this.name.items,this.index,'EDIT');
 		 		this.txt.index=this.index.i;
+		 		console.log(this.txt)
 		 		store.dispatch(shareTxtAction(this.txt));
-		 	}
+		 	},
+       updateViews:function(){
+         if(this.index.i==store.getState().txt.index){
+           this.txt=store.getState().txt;
+       }
 		 },
 		 mounted:function(){
-              this.txt=store.getState().txt;
-              store.subscribe(()=>{
-              	 this.txt=store.getState().txt;
-              	 //console.log('获取编辑框传递的数据是:');
-              	 //console.log(store.getState().txt);
-              });
+
+       this.updateViews()
+        store.subscribe(()=>{
+          this.updateViews()
+
+        });
 		 }
 	}
+}
 </script>

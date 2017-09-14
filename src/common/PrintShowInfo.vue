@@ -94,6 +94,16 @@
      data(){
          return {
               stores:{
+
+
+                id:'',
+                areaCode:'',
+                areaName:'',
+                areaSeq:1,
+                picDirection:1,
+                editType:1,
+
+
                 type:'CELL',
                 index:'',
                 shows:[
@@ -168,15 +178,18 @@
 
             console.log(this.stores);
 
+        },
+       updateViews:function () {
+           if(this.index.i == store.getState().infos.index){
+           this.stores.shows = store.getState().infos.shows
+          }
         }
+
      },
     mounted(){
+      this.updateViews()
       store.subscribe(()=>{
-        console.log(this.index.i)
-        console.log(store.getState().infos.index)
-        if(this.index.i == store.getState().infos.index){
-          this.stores.shows = store.getState().infos.shows
-        }
+        this.updateViews()
       })
     }
 

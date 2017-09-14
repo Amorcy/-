@@ -17,12 +17,11 @@
             	<div class="print-checked-box">
                            <input
                            class="text-inputs"
-                           :value="txt.textValue"
-                           :class="{'input-font-weight':txt.textWeight}"
-                           :style="{'textAlign':txt.textAlign,'fontFamily':txt.textFamily}"
-                           @keyup="changeTextValue($event)"
+                           :value="txt.text.textValue"
+                           :class="{'input-font-weight':txt.text.textWeight}"
+                           :style="{'textAlign':txt.text.textAlign,'fontFamily':txt.text.textFamily}"
                            />
-                           
+
                 </div>
             </div>
              <div v-if="fontFamilyBox" class="font-box">
@@ -34,12 +33,13 @@
             </div>
             <div v-else></div>
  		 </div>
-        
+    <div class="commit-data" @click="submitMsg">提交</div>
  	</div>
  </template>
 
  <script>
-    import draggable from 'vuedraggable';
+   import Api from '../api/api'
+   import draggable from 'vuedraggable';
     import store from '../constant/store';
     import {shareTxtAction} from '../constant/actions';
  	export default {
@@ -47,46 +47,55 @@
          components:{draggable},
          data(){
          	 return {
-         	 	 msg:'xxxx',
-                 selectInput:{        //记录被光标选中的节点
-                    index:-1,value:''
-                 },
-         	 	 templates:[],
-                 middleTemplates:[],  //用于去重的中间辅助变量
-                 operate:{            //用于纪录是否操作
-                    edit:false,//改变位置属性
-                 },
-                 fontFamilyBox:false,//控制字体选项盒子的现实隐藏
-                 fontFamilyOptions:[ //全部字体选项列表
-                    {id:0,name:'微软雅黑',value:'微软雅黑'},
-                    {id:1,name:'黑体',value:'SimHei'},
-                    {id:2,name:'Arial',value:'Arial'},
-                    {id:3,name:'宋体',value:'宋体'},
-                    {id:4,name:'Helvetica',value:'Helvetica'},
-                    {id:5,name:'Tahoma',value:'Tahoma'},
-                    {id:6,name:'sans-serif',value:'sans-serif'},
-                    {id:7,name:'微软正黑体',value:'Microsoft JhengHei'},
-                    {id:8,name:'新宋体',value:'NSimSun'},
-                    {id:9,name:'楷体',value:'KaiTi'},
-                    {id:10,name:'华文宋体',value:'STSong'},
-                    {id:11,name:'仿宋',value:'FangSong'},
-                 ],
-                 fontUpper:false,//设置字体大小写开关
-                 fontAlign:0,//居中状态码
-                 txt:{
-                    type:'TXT',
-                    index:'',
-                    textValue:'物美店庆大酬宾欢迎您！',
-                    textUpper:false,
-                    textFamily:'',
-                    textAlign:'center',
-                    textWeight:false
-                },
-                fontWeight:false //细字体
+             msg:'xxxx',
+             selectInput:{        //记录被光标选中的节点
+               index:-1,value:''
+             },
+             templates:[],
+             middleTemplates:[],  //用于去重的中间辅助变量
+             operate:{            //用于纪录是否操作
+                edit:false,//改变位置属性
+             },
+             fontFamilyBox:false,//控制字体选项盒子的现实隐藏
+             fontFamilyOptions:[ //全部字体选项列表
+                {id:0,name:'微软雅黑',value:'微软雅黑'},
+                {id:1,name:'黑体',value:'SimHei'},
+                {id:2,name:'Arial',value:'Arial'},
+                {id:3,name:'宋体',value:'宋体'},
+                {id:4,name:'Helvetica',value:'Helvetica'},
+                {id:5,name:'Tahoma',value:'Tahoma'},
+                {id:6,name:'sans-serif',value:'sans-serif'},
+                {id:7,name:'微软正黑体',value:'Microsoft JhengHei'},
+                {id:8,name:'新宋体',value:'NSimSun'},
+                {id:9,name:'楷体',value:'KaiTi'},
+                {id:10,name:'华文宋体',value:'STSong'},
+                {id:11,name:'仿宋',value:'FangSong'},
+             ],
+             fontUpper:false,//设置字体大小写开关
+             fontAlign:0,//居中状态码
+             txt:{
+                 id:'',
+                 areaCode:'',
+                 areaName:'',
+                 areaSeq:1,
+                 picDirection:1,
+                 editType:1,
+                 type:'TXT',
+                 index:'',
+                 text:{
+                   textValue:'物美店庆大酬宾欢迎您！',
+                   textUpper:false,
+                   textFamily:'',
+                   textAlign:'center',
+                   textWeight:false
+                 }
+
+              },
+              fontWeight:false //细字体
          	 }
          },
          methods:{
-          
+
             //开启改变子项位置
             openChangedSwitch:function(){
                 if(this.operate.edit){
@@ -97,16 +106,16 @@
             },
             //改变字体粗细
             changeFontWeight:function(){
-                 console.log(this.txt.textValue.trim("").length);
-                 if(this.txt.textValue.trim("").length==0){
+                 console.log(this.txt.text.textValue.trim("").length);
+                 if(this.txt.text.textValue.trim("").length==0){
                      return false;
                  }
                  if(this.fontWeight){
                       this.fontWeight=false;
-                      this.txt.textWeight=false;
+                      this.txt.text.textWeight=false;
                  }else{
                       this.fontWeight=true;
-                      this.txt.textWeight=true;
+                      this.txt.text.textWeight=true;
                  }
                  store.dispatch(shareTxtAction(this.txt));
             },
@@ -129,39 +138,39 @@
             },
             //改变字体类型
             changeFontFamily:function(ft,ftIndex){
-                 this.txt.textFamily=ft.value;
+                 this.txt.text.textFamily=ft.value;
                  store.dispatch(shareTxtAction(this.txt));
             },
             //改变字体大小写
             changeFontUpper:function(){
-                 console.log(this.txt.textValue.toUpperCase());
+                 console.log(this.txt.text.textValue.toUpperCase());
                  if(this.fontUpper==false){
-                    this.txt.textValue=this.txt.textValue.toUpperCase();
+                    this.txt.text.textValue=this.txt.text.textValue.toUpperCase();
                     this.fontUpper=true;
                  }else{
-                    this.txt.textValue=this.txt.textValue.toLowerCase();
+                    this.txt.text.textValue=this.txt.text.textValue.toLowerCase();
                     this.fontUpper=false;
                  }
 
-                 
+
             },
             //改变字体对齐方式
             changeFontAlign:function(){
-                 if(this.txt.textValue.trim("").length==0){
+                 if(this.txt.text.textValue.trim("").length==0){
                      return false;
                  }
                 var _align=this.fontAlign;
                 switch(_align){
                      case 0:
-                     this.txt.textAlign="left";
+                     this.txt.text.textAlign="left";
                      break;
                      case 1:
                      console.log('center');
-                     this.txt.textAlign="center";
+                     this.txt.text.textAlign="center";
                      break;
                      case 2:
                      console.log('right');
-                     this.txt.textAlign="right";
+                     this.txt.text.textAlign="right";
                      break;
                 }
                 this.fontAlign=_align+1;
@@ -169,21 +178,48 @@
                    this.fontAlign=0;
                 }
                 store.dispatch(shareTxtAction(this.txt));
-               
+
             },
             changeTextValue:function(e){
-                console.log('ok');
-                this.txt.textValue=e.target.value;
-                store.dispatch(shareTxtAction(this.txt))
-            }
+
+            },
+           submitMsg(){
+             this.txt.text.textValue=document.querySelector('.text-inputs').value;
+
+             let data = {
+               area:[
+                 {
+                   areaCode:this.txt.areaCode,
+                   areaName:this.txt.areaName,
+                   areaSeq:this.txt.areaSeq,
+                   editType:this.txt.editType,
+                   tmplId:'189076587302771240',
+                   picDirection:this.txt.picDirection,
+                   areaContent:JSON.stringify(this.txt.text)
+                 }
+               ]
+             }
+             var _options = {
+               headers: {
+//                 'Content-Type': 'application/json',
+                 'Authorization': Api.getToken()
+               }
+             }
+             console.log(data)
+             this.$http.put('http://101.200.79.3:8765/settings/api/print/tmpl/update/189076587302771240',data,_options)
+               .then((res)=>{
+                 console.log(res)
+               })
+
+
+             this.txt.text.textValue=document.querySelector('.text-inputs').value;
+             store.dispatch(shareTxtAction(this.txt))
+//             this.txt = {}
+           }
          },
          mounted:function(){
-              var _text=store.getState().txt;
-              if(typeof(_text) !="undefined"){
-                 this.txt=_text
-              }
+           this.txt=store.getState().txt;
               store.subscribe(()=>{
-                 console.log(store.getState().txt);
               	 this.txt=store.getState().txt;
               });
          }
@@ -192,7 +228,7 @@
 
  <style scoped>
       @import  '../iconfont/iconfont.css';
-     
+
      .print-header{
      	padding-left: 20px;
      	padding-top: 10px;
@@ -341,7 +377,7 @@
         border-radius: 4px;
         text-align: center;
         line-height: 20px;
-       
+
      }
      .close-font{
         display: inline-block;

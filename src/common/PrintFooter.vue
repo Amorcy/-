@@ -7,7 +7,7 @@
           :class="{'title-select':edit._edit}"
           >
         	  	   <div v-for="its in stores.shows" class="net-address">{{its.value}}</div>
-        	  	   
+
                     <div class="edit-box" v-if="edit._edit==true">
                         <span @click.stop="handleClick($event)">编辑</span>
                     <span @click.stop="openbox._openBox($event,name.items,index,'ADD')">加内容</span>
@@ -15,7 +15,6 @@
                     </div>
                     <div v-else></div>
               </div>
-        	  </div>
 </template>
 <style scoped>
 	 .container-show-footer{
@@ -56,16 +55,22 @@
          props:['index','name','callback','edit','openbox'],
          data(){
             return {
-                stores:{
-                    type:'HY',
-                    index:'',
-                    shows:[{id:0,name:"网址 www.youmeishiyun.com",checked:true,value:'网址 www.youmeishiyun.com',
+              stores:{
+                  id:5,
+                  areaCode:'PW',
+                  areaName:'票尾',
+                  areaSeq:5,
+                  picDirection:1,
+                  editType:4,
+                  type:'HY',
+                  index:'',
+                  shows:[{id:0,name:"网址 www.youmeishiyun.com",checked:true,value:'网址 www.youmeishiyun.com',
                    fontStyle:{
                                          fontFamily:'',
                                          fontWeight:false,
                                          textAlign:'',
                     }},
-                
+
                     {id:1,name:"电话 010-66708234",checked:true,value:"电话 010-66708234",
                                          fontStyle:{
                                          fontFamily:'',

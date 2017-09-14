@@ -2,7 +2,9 @@
 容器
 -->
 <script>
-    import PrintBase from './PrintBase';
+  import Api from '../api/api'
+  import store from '../constant/store';
+  import PrintBase from './PrintBase';
     import PrintTitle from './PrintTitle';
     import PrintLogo from './PrintLogo';//
     import PrintShowInfo from './PrintShowInfo';
@@ -22,6 +24,7 @@
 		  var ele=this.components;
 		  var types=this.type;
 		  var values=this.values;
+		  var submitMsg = this.submitMsg
           return <div>
                      <div class="container">
 
@@ -32,12 +35,12 @@
 	                        }
 
 			             </draggable>
-                         <BoxTemplate
-                         type={{types}}
-
-                         ></BoxTemplate>
+                   <BoxTemplate type={{types}}></BoxTemplate>
 			         </div>
-				</div>
+
+      <div class="commit-data">提交</div>
+
+        </div>
 		},
 		name:'PrintContainer',
 		components:{
@@ -80,9 +83,56 @@
                      component:PrintBarCode,type:'IMG',componentName:'PrintBarCode',edit:false}
                ],
                type:'NONE',
-			}
+               baseToken:'Basic eW1zLXRlc3Q6UlVLVFRKRUpPOEhUUkJYSEtPTFA=',
+
+      }
 		},
+    created(){
+//      ====================以下为模拟登陆设置localstorge,从而方便获取Token===========================
+      Api.setLS('username', 'sell1')
+      Api.setLS('password', 'admin')
+      var _body={};
+      _body.username='sell1';
+      _body.password='admin';
+      _body.grant_type="password";
+//        console.log(Api.formFormat(_body));
+      var _options={
+        headers:{
+          'Content-Type':'application/x-www-form-urlencoded',
+          'Authorization':this.baseToken
+        }
+      };
+      this.$http.post('http://101.200.79.3:8765/uaa/oauth/token', Api.formFormat(_body), _options)
+        .then( (response) => {
+          //将token信息保存到本地
+
+          var msg=Api.saveToken(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+
+//      ====================以下为获取所有信息===========================
+       _options = {
+        headers: {
+          'Content-Type': 'multipart-form-data',
+          'Authorization': Api.getToken()
+        }
+      }
+      this.$http.get('http://101.200.79.3:8765/settings/api/print/tmpl/area/189076587302771240',_options)
+        .then((res)=>{
+//          console.log(res)
+        })
+
+
+
+
+
+    },
 		methods:{
+      submitMsg(){
+        console.log(123)
+      },
 			clickBox:function(data,index,clickFlag){
              let _index=index.i;
              const self = this
@@ -134,7 +184,12 @@
 					        </transition-group>)
 		    }
 
-		}
+		},
+    mounted(){
+      store.subscribe(()=>{
+//        console.log(store.getState().sendData)
+      })
+    }
 
 	}
 </script>
@@ -142,12 +197,25 @@
 <style scoped>
 	.container{
 		width:400px;
-		padding: 0px 0px 20px 0px;
+		padding: 0px 0px 0px 0px;
 		background-color: #ffffff;
 		border-radius:4px;
      	box-shadow: 2px 2px 2px #acacac;
      	border:1px solid #ddd;
-     	margin: 40px;
+     	margin: 40px 40px 5px 40px;
      	position: relative;
 	}
+  .commit-data{
+    width:100px;
+    height:40px;
+    border-radius: 4px;
+    background-color:#673AB7;
+    color: #ffffff;
+    font-size: 20px;
+    line-height:40px;
+    margin-left: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+    user-select: none;
+  }
 </style>

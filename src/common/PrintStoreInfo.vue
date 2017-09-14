@@ -6,11 +6,11 @@
      @click="callback._callback(name.items,index,edit._edit)"
 	      :class="{'title-select':edit._edit}"
 	>
-        	  	  <div 
+        	  	  <div
         	  	  class="container-store-info-items"
         	  	  v-for="items in stores.shows"
         	  	  >{{items.value}}</div>
-                  
+
 
                   <div class="edit-box" v-if="edit._edit==true">
         	  		<span @click.stop="handleClick($event)">编辑</span>
@@ -64,8 +64,14 @@
 		 data(){
 		 	return {
                 stores:{
-                  type:'HY',
+                  id:4,
+                  areaCode:'PT',
+                  areaName:'票头',
+                  areaSeq:4,
+                  picDirection:1,
+                  editType:4,
                   index:'',
+                  type:'HY',
                   shows:[
                      {id:0,name:"门店名称",checked:true,value:'门店名称',
                    fontStyle:{
@@ -73,7 +79,7 @@
                                          fontWeight:false,
                                          textAlign:'',
                     }},
-                
+
                     {id:1,name:"订单号",checked:true,value:"订单号",
                                       fontStyle:{
                                          fontFamily:'',
@@ -158,6 +164,7 @@
              store.subscribe(()=>{
              	  this.updateViews();
              });
+
 		 },
      methods:{
       handleClick:function($event){
@@ -167,8 +174,6 @@
         store.dispatch(shareHYAction(this.stores));
       },
        updateViews:function(){
-             //console.log('store.getState().stores');
-             //console.log(store.getState().stores);
              if(this.index.i==store.getState().stores.index){
                 this.stores=store.getState().stores;
              }

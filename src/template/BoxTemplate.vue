@@ -1,7 +1,7 @@
 <template>
 	<div class="box-template">
-	    
-	   
+
+
 			<div v-if="type.types=='TEXT'">
 			    <TxtTemplate></TxtTemplate>
 			</div>
@@ -10,7 +10,7 @@
 				    <ImgTemplate></ImgTemplate>
 			    </div>
 			    <div v-else>
-			    	<div v-if="type.types=='HY'">
+			    	<div v-if="type.types=='HY' || type.types=='HT'">
 				        <HYTemplate></HYTemplate>
 			        </div>
 			        <div v-else>
@@ -46,7 +46,7 @@
 	 	 props:['type','name'],
 	 	 components:{ImgTemplate,TxtTemplate,HYTemplate,CellTemplate},
 	 	 mounted(){
-	 	 	
+
 	 	 }
 	 }
 </script>
