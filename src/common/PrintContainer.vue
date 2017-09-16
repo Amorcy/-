@@ -102,7 +102,7 @@
           'Authorization':this.baseToken
         }
       };
-      this.$http.post('http://101.200.79.3:8765/uaa/oauth/token', Api.formFormat(_body), _options)
+      this.$http.post('http://xxx.xxx.xxx.xxx:8765/uaa/oauth/token', Api.formFormat(_body), _options)
         .then( (response) => {
           //将token信息保存到本地
 
