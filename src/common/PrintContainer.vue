@@ -119,7 +119,7 @@
           'Authorization': Api.getToken()
         }
       }
-      this.$http.get('http://101.200.79.3:8765/settings/api/print/tmpl/area/189076587302771240',_options)
+      this.$http.get('http://xxx.xxx.xxx.xxx:8765/settings/api/print/tmpl/area/189076587302771240',_options)
         .then((res)=>{
 //          console.log(res)
         })
